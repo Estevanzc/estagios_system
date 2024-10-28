@@ -8,4 +8,4 @@ Excel:
 
  1 - Requisitos_Funcionais => https://docs.google.com/spreadsheets/d/1InJBj115MYd2QwXzReThiD9WEL9VQUq4D1he8yOORnk/edit?usp=sharing
  2 - Requisitos_Nao_Funcionais => https://docs.google.com/spreadsheets/d/1F9N-L8fv0aCFv4nmKMgm4ah7wAPpH33NeGpa-t6SQcg/edit?usp=sharing
- 3 - Regra de Negócio => https://docs.google.com/spreadsheets/d/1IIZVYQW0PHD-unDi2sLMfX4CpRi0EUObBDjuwo3HRW8/edit?usp=sharing
+ 3 - Regra_de_Negócio => https://docs.google.com/spreadsheets/d/1IIZVYQW0PHD-unDi2sLMfX4CpRi0EUObBDjuwo3HRW8/edit?usp=sharing
