@@ -4,6 +4,8 @@ Draw.io:
      1.1 - Contratar_Estagio_Obrigatorio - https://drive.google.com/file/d/1gbfKyQ_72V_P2keyFWv-5kCNqnOvahCb/view?usp=sharing
      1.2 - Finalizar_Estagio - https://drive.google.com/file/d/1CqcrWXL66uvcUD1CjCeZWzOunDtbD3sL/view?usp=sharing
 
+ 2 - Diagrama_de_casos_de_uso - https://drive.google.com/file/d/1Elqmos57sNIzzCZDmmvGaJ_jlbKr2aS0/view?usp=sharing
+
 Excel:
 
  1 - Requisitos_Funcionais => https://docs.google.com/spreadsheets/d/1InJBj115MYd2QwXzReThiD9WEL9VQUq4D1he8yOORnk/edit?usp=sharing
