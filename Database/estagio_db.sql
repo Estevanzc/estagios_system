@@ -187,11 +187,11 @@ CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
   `login` varchar(12) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `nivel` int NOT NULL,
+  `nivel` int DEFAULT (1),
   `foto` varchar(255) DEFAULT (NULL),
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'carloss','senha123',1,NULL),(2,'fernandal','senha456',2,NULL),(3,'lucasal','senha789',1,NULL),(4,'anasouza','senha101',2,NULL),(5,'pedros','senha202',1,NULL);
+INSERT INTO `usuario` VALUES (1,'admin','21232f297a57a5a743894a0e4a801fc3',2,NULL);
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -213,4 +213,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-06 11:35:08
+-- Dump completed on 2024-11-06 13:28:13
