@@ -2,14 +2,14 @@
 
 namespace Controller;
 
-use Model\AlunoModel;
-use Model\VO\AlunoVO;
+use Model\EstudanteModel;
+use Model\VO\EstudanteVO;
 
-final class AlunoController extends Controller {
+final class EstudanteController extends Controller {
 
     public function list() {
-        $model = new AlunoModel();
-        $data = $model->selectAll(new AlunoVO());
+        $model = new EstudanteModel();
+        $data = $model->selectAll(new EstudanteVO());
 
         $this->loadView("listaAlunos", [
             "alunos" => $data
@@ -20,11 +20,11 @@ final class AlunoController extends Controller {
         $id = $_GET["id"] ?? 0;
 
         if(!empty($id)) {
-            $model = new AlunoModel();
-            $vo = new AlunoVO($id);
+            $model = new EstudanteModel();
+            $vo = new EstudanteVO($id);
             $aluno = $model->selectOne($vo);
         } else {
-            $aluno = new AlunoVO();
+            $aluno = new EstudanteVO();
         }
 
         $this->loadView("formAluno", [
@@ -34,9 +34,9 @@ final class AlunoController extends Controller {
 
     public function save() {
         $id = $_POST["id"];
-        $model = new AlunoModel();
-        $nome_arquivo = $this->uploadFile($_FILES["foto"], empty($id) ? "" : $model->selectOne(new AlunoVO($id))->getFoto());
-        $vo = new AlunoVO($id, $_POST["nome"], $_POST["matricula"], $nome_arquivo);
+        $model = new EstudanteModel();
+        $nome_arquivo = $this->uploadFile($_FILES["foto"], empty($id) ? "" : $model->selectOne(new EstudanteVO($id))->getFoto());
+        $vo = new EstudanteVO($id, $_POST["nome"], $_POST["matricula"], $nome_arquivo);
 
         if(empty($id)) {
             $result = $model->insert($vo);
@@ -48,8 +48,8 @@ final class AlunoController extends Controller {
     }
 
     public function remove() {
-        $vo = new AlunoVO($_GET["id"]);
-        $model = new AlunoModel();
+        $vo = new EstudanteVO($_GET["id"]);
+        $model = new EstudanteModel();
         $vo = $model->selectOne($vo);
 
         $result = $model->delete($vo);

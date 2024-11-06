@@ -5,7 +5,7 @@ namespace Controller;
 use Model\ProfessorModel;
 use Model\VO\ProfessorVO;
 
-final class AlunoController extends Controller {
+final class ProfessorController extends Controller {
 
     public function list() {
         $model = new ProfessorModel();

@@ -3,7 +3,7 @@
 namespace Controller;
 
 abstract class Controller {
-    public function __construct($obriga_login = true) {
+    public function __construct($obriga_login = false, $restricted = false) {
         if (!isset($_SESSION)) {
             session_start();
             session_regenerate_id();
@@ -12,11 +12,16 @@ abstract class Controller {
             $this->redirect("login.php");
             exit();
         }
+        if ($restricted) {
+            if ($_SESSION["usuario"]->getNivel() < 2) {
+                $this->redirect("index.php");
+                exit();
+            }
+        }
     }
     public function uploadFile($file, $old_file = "") {
-        if (!empty($old_file)) {
-            $this->deleteFile($old_file);
-        }
+        $this->deleteFile($old_file);
+        
         if (empty($file["name"])) {
             return "";
         }
@@ -26,8 +31,10 @@ abstract class Controller {
         return $nome_arquivo;
     }
     public function deleteFile($file_name) {
-        $path = "uploads/" . $file_name;
-        unlink($path);
+        if(!empty($file_name)) {
+            $path = "uploads/" . $file_name;
+            unlink($path);
+        }
     }
 
     public function redirect($url) {

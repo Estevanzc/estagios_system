@@ -6,12 +6,6 @@ use Model\UsuarioModel;
 use Model\VO\UsuarioVO;
 
 final class UsuarioController extends Controller {
-    public function __construct() {
-        parent::__construct();
-        if ($_SESSION["usuario"]->getNivel() == 2) {
-            $this->redirect("index.php");
-        }
-    }
 
     public function list() {
         $model = new UsuarioModel();
@@ -40,8 +34,9 @@ final class UsuarioController extends Controller {
 
     public function save() {
         $id = $_POST["id"];
-        $vo = new UsuarioVO($id, $_POST["login"], $_POST["senha"], $_POST["nivel"]);
         $model = new UsuarioModel();
+        $nome_arquivo = $this->uploadFile($_FILES["foto"], (empty($id) ? "" : $model->selectOne(new UsuarioVO($id))->getFoto()));
+        $vo = new UsuarioVO($id, $_POST["login"], $_POST["senha"], $_POST["nivel"], $nome_arquivo);
 
         if(empty($id)) {
             $result = $model->insert($vo);
@@ -55,6 +50,7 @@ final class UsuarioController extends Controller {
     public function remove() {
         $vo = new UsuarioVO($_GET["id"]);
         $model = new UsuarioModel();
+        $vo = $model->selectOne($vo);
 
         $result = $model->delete($vo);
 

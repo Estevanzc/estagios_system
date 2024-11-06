@@ -3,6 +3,7 @@
 namespace Model;
 
 use Model\VO\UsuarioVO;
+use Controller\UsuarioController;
 
 final class UsuarioModel extends Model {
 
@@ -14,7 +15,7 @@ final class UsuarioModel extends Model {
         $arrayDados = [];
 
         foreach($data as $row) {
-            $vo = new UsuarioVO($row["id"], $row["login"], $row["senha"], $row["nivel"]);
+            $vo = new UsuarioVO($row["id"], $row["login"], $row["senha"], $row["nivel"], $row["foto"]);
             array_push($arrayDados, $vo);
         }
 
@@ -27,35 +28,39 @@ final class UsuarioModel extends Model {
         $binds = ["id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
-        return new UsuarioVO($data[0]["id"], $data[0]["login"], $data[0]["senha"], $data[0]["nivel"]);
+        return new UsuarioVO($data[0]["id"], $data[0]["login"], $data[0]["senha"], $data[0]["nivel"], $data[0]["foto"]);
     }
 
     public function insert($vo) {
         $db = new Connection();
-        $query = "INSERT INTO usuarios VALUES (default, :login, :senha, :nivel)";
-        $binds = ["login" => $vo->getLogin(), "senha" => md5($vo->getSenha()), "nivel" => $vo->getNivel()];
+        $query = "INSERT INTO usuarios VALUES (default, :login, :senha, :nivel, ".(empty($vo->getFoto()) ? "null" : ":foto").")";
+        $binds = [
+            "login" => $vo->getLogin(),
+            "senha" => md5($vo->getSenha()),
+            "nivel" => $vo->getNivel(),
+        ];
+        if (!empty($vo->getFoto())) {
+            $binds["foto"] = $vo->getFoto();
+        }
 
         return $db->execute($query, $binds);
     }
 
     public function update($vo) {
         $db = new Connection();
-        if (empty($vo->getSenha())) {
-            $query = "UPDATE usuarios SET login=:login, nivel=:nivel WHERE id = :id";
-            $binds = [
-                "login" => $vo->getLogin(),
-                "nivel" => $vo->getNivel(),
-                "id" => $vo->getId()    
-            ];
-        } else {
-            $query = "UPDATE usuarios SET login=:login, nivel=:nivel, senha=:senha WHERE id = :id";
-            $binds = [
-                "login" => $vo->getLogin(),
-                "nivel" => $vo->getNivel(),
-                "senha" => md5($vo->getSenha()),
-                "id" => $vo->getId()
-            ];
+        $query = "UPDATE usuarios SET login=:login,".(empty($vo->getSenha()) ? "" : " senha=:senha,")." nivel=:nivel".(empty($vo->getFoto()) ? "" : ", foto=:foto")." WHERE id = :id";
+        $binds = [
+            "id" => $vo->getId(),
+            "login" => $vo->getLogin(),
+            "nivel" => $vo->getNivel(),
+        ];
+        if (!empty($vo->getFoto())) {
+            $binds["foto"] = $vo->getFoto();
         }
+        if (!empty($vo->getSenha())) {
+            $binds["senha"] = md5($vo->getSenha());
+        }
+
         return $db->execute($query, $binds);
     }
 
@@ -63,6 +68,7 @@ final class UsuarioModel extends Model {
         $db = new Connection();
         $query = "DELETE FROM usuarios WHERE id = :id";
         $binds = ["id" => $vo->getId()];
+        (new UsuarioController())->deleteFile($vo->getFoto());
 
         return $db->execute($query, $binds);
     }
@@ -77,7 +83,7 @@ final class UsuarioModel extends Model {
         if (count($data) == 0) {
             return null;
         }
-        $_SESSION["usuario"] = new UsuarioVO($data[0]["id"],$data[0]["login"], $data[0]["senha"], $data[0]["nivel"]);
+        $_SESSION["usuario"] = new UsuarioVO($data[0]["id"],$data[0]["login"], $data[0]["senha"], $data[0]["nivel"], $data[0]["foto"]);
         return $_SESSION["usuario"];
     }
 }

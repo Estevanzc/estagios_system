@@ -3,13 +3,13 @@
 namespace Model\VO;
 
 final class EmpresaVO extends VO {
-
+    
     private $nome;
     private $email;
     private $cnpj;
     private $supervisor;
     private $s_cargo;
-    private $s_representante;
+    private $s_telefone;
     private $s_email;
     private $representante;
     private $r_funcao;
@@ -20,14 +20,14 @@ final class EmpresaVO extends VO {
     private $telefone;
     private $convenio;
 
-    public function __construct($id = 0, $nome = "", $email = "", $cnpj = "", $supervisor = "", $s_cargo = "", $s_representante = "", $s_email = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "") {
+    public function __construct($id = 0, $nome = "", $email = "", $cnpj = "", $supervisor = "", $s_cargo = "", $s_telefone = "", $s_email = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->email = $email;
         $this->cnpj = $cnpj;
         $this->supervisor = $supervisor;
         $this->s_cargo = $s_cargo;
-        $this->s_representante = $s_representante;
+        $this->s_telefone = $s_telefone;
         $this->s_email = $s_email;
         $this->representante = $representante;
         $this->r_funcao = $r_funcao;
@@ -67,12 +67,12 @@ final class EmpresaVO extends VO {
     public function setS_cargo($s_cargo) {
         $this->s_cargo = $s_cargo;
     }
-    public function getS_representante() {
-        return $this->s_representante;
+    public function getS_telefone() {
+        return $this->s_telefone;
     }
 
-    public function setS_representante($s_representante) {
-        $this->s_representante = $s_representante;
+    public function setS_telefone($s_telefone) {
+        $this->s_telefone = $s_telefone;
     }
     public function getS_email() {
         return $this->s_email;

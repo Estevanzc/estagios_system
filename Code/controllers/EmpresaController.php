@@ -5,7 +5,7 @@ namespace Controller;
 use Model\EmpresaModel;
 use Model\VO\EmpresaVO;
 
-final class AlunoController extends Controller {
+final class EmpresaController extends Controller {
 
     public function list() {
         $model = new EmpresaModel();

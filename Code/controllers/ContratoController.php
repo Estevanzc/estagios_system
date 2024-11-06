@@ -5,7 +5,7 @@ namespace Controller;
 use Model\ContratoModel;
 use Model\VO\ContratoVO;
 
-final class AlunoController extends Controller {
+final class ContratoController extends Controller {
 
     public function list() {
         $model = new ContratoModel();
