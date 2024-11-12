@@ -1,10 +1,10 @@
-CREATE DATABASE  IF NOT EXISTS `estagio_db` /*!40100 DEFAULT CHARACTER SET utf8mb3 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `estagio_db` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 USE `estagio_db`;
--- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
 -- Host: localhost    Database: estagio_db
 -- ------------------------------------------------------
--- Server version	8.0.40
+-- Server version	5.5.5-10.4.28-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -25,16 +25,17 @@ DROP TABLE IF EXISTS `contrato`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contrato` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `processo` enum('','','') NOT NULL,
   `encaminhamento` tinyint(1) NOT NULL,
   `area` varchar(255) NOT NULL,
   `data_inicio` date NOT NULL,
   `data_fim` date NOT NULL,
-  `carga_horaria` int NOT NULL,
-  `id_empresa` int NOT NULL,
-  `id_estudante` int NOT NULL,
-  `id_professor` int NOT NULL,
+  `carga_horaria` int(11) NOT NULL,
+  `media_final` int(11) DEFAULT 0,
+  `id_empresa` int(11) NOT NULL,
+  `id_estudante` int(11) NOT NULL,
+  `id_professor` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_empresa` (`id_empresa`),
   KEY `id_estudante` (`id_estudante`),
@@ -42,7 +43,7 @@ CREATE TABLE `contrato` (
   CONSTRAINT `contrato_ibfk_1` FOREIGN KEY (`id_empresa`) REFERENCES `empresa` (`id`),
   CONSTRAINT `contrato_ibfk_2` FOREIGN KEY (`id_estudante`) REFERENCES `estudante` (`id`),
   CONSTRAINT `contrato_ibfk_3` FOREIGN KEY (`id_professor`) REFERENCES `professor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +52,7 @@ CREATE TABLE `contrato` (
 
 LOCK TABLES `contrato` WRITE;
 /*!40000 ALTER TABLE `contrato` DISABLE KEYS */;
-INSERT INTO `contrato` VALUES (1,'',1,'Desenvolvimento','2024-01-01','2024-06-30',120,1,1,1),(2,'',1,'Pesquisa','2024-02-01','2024-07-31',100,2,2,2),(3,'',0,'Estágio','2024-03-01','2024-08-31',80,3,3,3),(4,'',1,'Administração','2024-04-01','2024-09-30',140,4,4,4),(5,'',0,'Marketing','2024-05-01','2024-10-31',60,5,5,5);
+INSERT INTO `contrato` VALUES (1,'',1,'Desenvolvimento','2024-01-01','2024-06-30',120,0,1,1,1),(2,'',1,'Pesquisa','2024-02-01','2024-07-31',100,0,2,2,2),(3,'',0,'Estágio','2024-03-01','2024-08-31',80,0,3,3,3),(4,'',1,'Administração','2024-04-01','2024-09-30',140,0,4,4,4),(5,'',0,'Marketing','2024-05-01','2024-10-31',60,0,5,5,5);
 /*!40000 ALTER TABLE `contrato` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +64,7 @@ DROP TABLE IF EXISTS `empresa`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `empresa` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `cnpj` char(14) NOT NULL,
@@ -87,7 +88,7 @@ CREATE TABLE `empresa` (
   UNIQUE KEY `r_cpf` (`r_cpf`),
   UNIQUE KEY `r_rg` (`r_rg`),
   UNIQUE KEY `telefone` (`telefone`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +109,7 @@ DROP TABLE IF EXISTS `estudante`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `estudante` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `matricula` char(12) NOT NULL,
@@ -117,14 +118,14 @@ CREATE TABLE `estudante` (
   `cidade` varchar(255) NOT NULL,
   `endereco` varchar(255) NOT NULL,
   `telefone` varchar(255) NOT NULL,
-  `foto` varchar(255) DEFAULT (NULL),
+  `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `matricula` (`matricula`),
   UNIQUE KEY `cpf` (`cpf`),
   UNIQUE KEY `rg` (`rg`),
   UNIQUE KEY `telefone` (`telefone`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +146,7 @@ DROP TABLE IF EXISTS `professor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `professor` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `siape` char(8) NOT NULL,
@@ -155,7 +156,7 @@ CREATE TABLE `professor` (
   `endereco` varchar(255) NOT NULL,
   `telefone` varchar(255) NOT NULL,
   `funcao` enum('professor','coordenador') NOT NULL,
-  `foto` varchar(255) DEFAULT (NULL),
+  `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `cpf` (`cpf`),
   UNIQUE KEY `siape` (`siape`),
@@ -163,7 +164,7 @@ CREATE TABLE `professor` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `email_2` (`email`),
   UNIQUE KEY `telefone` (`telefone`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -184,14 +185,14 @@ DROP TABLE IF EXISTS `usuario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuario` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `login` varchar(12) NOT NULL,
   `senha` varchar(255) NOT NULL,
-  `nivel` int DEFAULT (1),
-  `foto` varchar(255) DEFAULT (NULL),
+  `nivel` int(11) DEFAULT 1,
+  `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,4 +214,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-06 13:28:13
+-- Dump completed on 2024-11-12  8:03:37
