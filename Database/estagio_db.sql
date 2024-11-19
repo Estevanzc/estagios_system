@@ -18,6 +18,33 @@ USE `estagio_db`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `banca`
+--
+
+DROP TABLE IF EXISTS `banca`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `banca` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `id_contrato` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_contrato` (`id_contrato`),
+  CONSTRAINT `banca_ibfk_1` FOREIGN KEY (`id_contrato`) REFERENCES `contratos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `banca`
+--
+
+LOCK TABLES `banca` WRITE;
+/*!40000 ALTER TABLE `banca` DISABLE KEYS */;
+/*!40000 ALTER TABLE `banca` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `contratos`
 --
 
@@ -33,6 +60,10 @@ CREATE TABLE `contratos` (
   `data_fim` date NOT NULL,
   `carga_horaria` int(11) NOT NULL,
   `media_final` int(11) DEFAULT 0,
+  `supervisor` varchar(255) NOT NULL,
+  `s_cargo` varchar(255) NOT NULL,
+  `s_telefone` varchar(255) NOT NULL,
+  `s_email` varchar(255) NOT NULL,
   `observacao` text DEFAULT NULL,
   `id_empresa` int(11) NOT NULL,
   `id_estudante` int(11) NOT NULL,
@@ -53,7 +84,7 @@ CREATE TABLE `contratos` (
 
 LOCK TABLES `contratos` WRITE;
 /*!40000 ALTER TABLE `contratos` DISABLE KEYS */;
-INSERT INTO `contratos` VALUES (11,'Impresso','Documentos Confirmados','Desenvolvimento de Software','2023-01-10','2023-06-10',300,85,'Contrato de estágio para desenvolvimento de software.',6,6,6),(12,'Digital','Documentos Faltantes','Marketing Digital','2023-02-15','2023-07-15',240,90,'Estágio em marketing digital com foco em redes sociais.',7,7,7),(13,'Físico','Documentos Confirmados','Engenharia','2023-03-01','2023-08-01',360,88,'Estágio em engenharia civil, acompanhamento de obras.',8,8,8),(14,'Impresso','Documentos Faltantes','Administração','2023-04-05','2023-09-05',180,92,'Estágio em administração de empresas, apoio em gestão.',9,9,9),(15,'Digital','Documentos Confirmados','Recursos Humanos','2023-05-10','2023-10-10',200,87,'Estágio em recursos humanos, recrutamento e seleção.',10,10,10);
+INSERT INTO `contratos` VALUES (11,'Impresso','Documentos Confirmados','Desenvolvimento de Software','2023-01-10','2023-06-10',300,85,'','','','','Contrato de estágio para desenvolvimento de software.',6,6,6),(12,'Digital','Documentos Faltantes','Marketing Digital','2023-02-15','2023-07-15',240,90,'','','','','Estágio em marketing digital com foco em redes sociais.',7,7,7),(13,'Físico','Documentos Confirmados','Engenharia','2023-03-01','2023-08-01',360,88,'','','','','Estágio em engenharia civil, acompanhamento de obras.',8,8,8),(14,'Impresso','Documentos Faltantes','Administração','2023-04-05','2023-09-05',180,92,'','','','','Estágio em administração de empresas, apoio em gestão.',9,9,9),(15,'Digital','Documentos Confirmados','Recursos Humanos','2023-05-10','2023-10-10',200,87,'','','','','Estágio em recursos humanos, recrutamento e seleção.',10,10,10);
 /*!40000 ALTER TABLE `contratos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,10 +127,6 @@ CREATE TABLE `empresas` (
   `nome` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `cnpj` char(14) NOT NULL,
-  `supervisor` varchar(255) NOT NULL,
-  `s_cargo` varchar(255) NOT NULL,
-  `s_telefone` varchar(255) NOT NULL,
-  `s_email` varchar(255) NOT NULL,
   `representante` varchar(255) NOT NULL,
   `r_funcao` varchar(255) NOT NULL,
   `r_cpf` char(11) NOT NULL,
@@ -111,8 +138,6 @@ CREATE TABLE `empresas` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `cnpj` (`cnpj`),
-  UNIQUE KEY `s_telefone` (`s_telefone`),
-  UNIQUE KEY `s_email` (`s_email`),
   UNIQUE KEY `r_cpf` (`r_cpf`),
   UNIQUE KEY `r_rg` (`r_rg`),
   UNIQUE KEY `telefone` (`telefone`)
@@ -125,7 +150,7 @@ CREATE TABLE `empresas` (
 
 LOCK TABLES `empresas` WRITE;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
-INSERT INTO `empresas` VALUES (6,'Empresa A','contato@empresaA.com','12345678000195','João Silva','Gerente','11987654321','supervisor@empresaA.com','Maria Souza','Diretora','12345678901','MG123456','São Paulo','Rua A, 123','1134567890','Convênio X'),(7,'Empresa B','contato@empresaB.com','98765432000196','Ana Pereira','Coordenadora','11987654322','supervisor@empresaB.com','Carlos Oliveira','Gerente','10987654321','MG654321','Rio de Janeiro','Rua B, 456','2134567890','Convênio Y'),(8,'Empresa C','contato@empresaC.com','12312313000197','Lucas Rocha','Diretor','11987654323','supervisor@empresaC.com','Fernanda Lima','Coordenadora','19876543210','MG789012','Belo Horizonte','Rua C, 789','3134567890','Convênio Z'),(9,'Empresa D','contato@empresaD.com','32132132000198','Patrícia Costa','Analista','11987654324','supervisor@empresaD.com','Roberto Santos','Diretor','98765432109','MG345678','Salvador','Rua D, 101','4134567890','Convênio W'),(10,'Empresa E','contato@empresaE.com','45645645000199','Mariana Alves','Gerente','11987654325','supervisor@empresaE.com','Julio Mendes','Coordenador','87654321098','MG234567','Curitiba','Rua E, 202','5134567890','Convênio V');
+INSERT INTO `empresas` VALUES (6,'Empresa A','contato@empresaA.com','12345678000195','Maria Souza','Diretora','12345678901','MG123456','São Paulo','Rua A, 123','1134567890','Convênio X'),(7,'Empresa B','contato@empresaB.com','98765432000196','Carlos Oliveira','Gerente','10987654321','MG654321','Rio de Janeiro','Rua B, 456','2134567890','Convênio Y'),(8,'Empresa C','contato@empresaC.com','12312313000197','Fernanda Lima','Coordenadora','19876543210','MG789012','Belo Horizonte','Rua C, 789','3134567890','Convênio Z'),(9,'Empresa D','contato@empresaD.com','32132132000198','Roberto Santos','Diretor','98765432109','MG345678','Salvador','Rua D, 101','4134567890','Convênio W'),(10,'Empresa E','contato@empresaE.com','45645645000199','Julio Mendes','Coordenador','87654321098','MG234567','Curitiba','Rua E, 202','5134567890','Convênio V');
 /*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,4 +271,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-14 12:51:58
+-- Dump completed on 2024-11-19  8:07:00
