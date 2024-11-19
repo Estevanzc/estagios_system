@@ -65,6 +65,7 @@ CREATE TABLE `contratos` (
   `s_telefone` varchar(255) NOT NULL,
   `s_email` varchar(255) NOT NULL,
   `observacao` text DEFAULT NULL,
+  `encerramento` tinyint(1) DEFAULT 0,
   `id_empresa` int(11) NOT NULL,
   `id_estudante` int(11) NOT NULL,
   `id_professor` int(11) NOT NULL,
@@ -84,7 +85,7 @@ CREATE TABLE `contratos` (
 
 LOCK TABLES `contratos` WRITE;
 /*!40000 ALTER TABLE `contratos` DISABLE KEYS */;
-INSERT INTO `contratos` VALUES (11,'Impresso','Documentos Confirmados','Desenvolvimento de Software','2023-01-10','2023-06-10',300,85,'','','','','Contrato de estágio para desenvolvimento de software.',6,6,6),(12,'Digital','Documentos Faltantes','Marketing Digital','2023-02-15','2023-07-15',240,90,'','','','','Estágio em marketing digital com foco em redes sociais.',7,7,7),(13,'Físico','Documentos Confirmados','Engenharia','2023-03-01','2023-08-01',360,88,'','','','','Estágio em engenharia civil, acompanhamento de obras.',8,8,8),(14,'Impresso','Documentos Faltantes','Administração','2023-04-05','2023-09-05',180,92,'','','','','Estágio em administração de empresas, apoio em gestão.',9,9,9),(15,'Digital','Documentos Confirmados','Recursos Humanos','2023-05-10','2023-10-10',200,87,'','','','','Estágio em recursos humanos, recrutamento e seleção.',10,10,10);
+INSERT INTO `contratos` VALUES (11,'Impresso','Documentos Confirmados','Desenvolvimento de Software','2023-01-10','2023-06-10',300,85,'','','','','Contrato de estágio para desenvolvimento de software.',0,6,6,6),(12,'Digital','Documentos Faltantes','Marketing Digital','2023-02-15','2023-07-15',240,90,'','','','','Estágio em marketing digital com foco em redes sociais.',0,7,7,7),(13,'Físico','Documentos Confirmados','Engenharia','2023-03-01','2023-08-01',360,88,'','','','','Estágio em engenharia civil, acompanhamento de obras.',0,8,8,8),(14,'Impresso','Documentos Faltantes','Administração','2023-04-05','2023-09-05',180,92,'','','','','Estágio em administração de empresas, apoio em gestão.',0,9,9,9),(15,'Digital','Documentos Confirmados','Recursos Humanos','2023-05-10','2023-10-10',200,87,'','','','','Estágio em recursos humanos, recrutamento e seleção.',0,10,10,10);
 /*!40000 ALTER TABLE `contratos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-19  8:07:00
+-- Dump completed on 2024-11-19  8:15:51
