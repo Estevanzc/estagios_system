@@ -7,10 +7,6 @@ final class EmpresaVO extends VO {
     private $nome;
     private $email;
     private $cnpj;
-    private $supervisor;
-    private $s_cargo;
-    private $s_telefone;
-    private $s_email;
     private $representante;
     private $r_funcao;
     private $r_cpf;
@@ -20,15 +16,11 @@ final class EmpresaVO extends VO {
     private $telefone;
     private $convenio;
 
-    public function __construct($id = 0, $nome = "", $email = "", $cnpj = "", $supervisor = "", $s_cargo = "", $s_telefone = "", $s_email = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "") {
+    public function __construct($id = 0, $nome = "", $email = "", $cnpj = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->email = $email;
         $this->cnpj = $cnpj;
-        $this->supervisor = $supervisor;
-        $this->s_cargo = $s_cargo;
-        $this->s_telefone = $s_telefone;
-        $this->s_email = $s_email;
         $this->representante = $representante;
         $this->r_funcao = $r_funcao;
         $this->r_cpf = $r_cpf;
@@ -52,34 +44,6 @@ final class EmpresaVO extends VO {
 
     public function setEmail($email) {
         $this->email = $email;
-    }
-    public function getSupervisor() {
-        return $this->supervisor;
-    }
-
-    public function setSupervisor($supervisor) {
-        $this->supervisor = $supervisor;
-    }
-    public function getS_cargo() {
-        return $this->s_cargo;
-    }
-
-    public function setS_cargo($s_cargo) {
-        $this->s_cargo = $s_cargo;
-    }
-    public function getS_telefone() {
-        return $this->s_telefone;
-    }
-
-    public function setS_telefone($s_telefone) {
-        $this->s_telefone = $s_telefone;
-    }
-    public function getS_email() {
-        return $this->s_email;
-    }
-
-    public function setS_email($s_email) {
-        $this->s_email = $s_email;
     }
     public function getRepresentante() {
         return $this->representante;
@@ -112,7 +76,7 @@ final class EmpresaVO extends VO {
         $this->r_funcao = $r_funcao;
     }
     public function getR_rg() {
-        return $this->r_funcao;
+        return $this->r_rg;
     }
 
     public function setR_rg($r_rg) {

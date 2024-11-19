@@ -10,11 +10,17 @@ final class ContratoVO extends VO {
     private $data_inicio;
     private $data_fim;
     private $carga_horaria;
+    private $media_final;
+    private $supervisor;
+    private $s_cargo;
+    private $s_telefone;
+    private $s_email;
+    private $observacao;
     private $id_empresa;
     private $id_estudante;
     private $id_professor;
 
-    public function __construct($id = 0, $processo = "", $encaminhamento = false, $area = "", $data_inicio = null, $data_fim = null, $carga_horaria = 0, $id_empresa = 0, $id_estudante = 0, $id_professor = 0) {
+    public function __construct($id = 0, $processo = "", $encaminhamento = false, $area = "", $data_inicio = "", $data_fim = "", $carga_horaria = 0, $media_final = 0, $supervisor = "", $s_cargo = "", $s_telefone = "", $s_email = "", $observacao = "", $id_empresa = 0, $id_estudante = 0, $id_professor = 0) {
         parent::__construct($id);
         $this->processo = $processo;
         $this->encaminhamento = $encaminhamento;
@@ -22,6 +28,12 @@ final class ContratoVO extends VO {
         $this->data_inicio = $data_inicio;
         $this->data_fim = $data_fim;
         $this->carga_horaria = $carga_horaria;
+        $this->media_final = $media_final;
+        $this->supervisor = $supervisor;
+        $this->s_cargo = $s_cargo;
+        $this->s_telefone = $s_telefone;
+        $this->s_email = $s_email;
+        $this->observacao = $observacao;
         $this->id_empresa = $id_empresa;
         $this->id_estudante = $id_estudante;
         $this->id_professor = $id_professor;
@@ -34,6 +46,7 @@ final class ContratoVO extends VO {
     public function setProcesso($processo) {
         $this->processo = $processo;
     }
+
     public function getEncaminhamento() {
         return $this->encaminhamento;
     }
@@ -41,6 +54,7 @@ final class ContratoVO extends VO {
     public function setEncaminhamento($encaminhamento) {
         $this->encaminhamento = $encaminhamento;
     }
+
     public function getArea() {
         return $this->area;
     }
@@ -48,6 +62,7 @@ final class ContratoVO extends VO {
     public function setArea($area) {
         $this->area = $area;
     }
+
     public function getData_inicio() {
         return $this->data_inicio;
     }
@@ -55,6 +70,7 @@ final class ContratoVO extends VO {
     public function setData_inicio($data_inicio) {
         $this->data_inicio = $data_inicio;
     }
+
     public function getData_fim() {
         return $this->data_fim;
     }
@@ -95,4 +111,51 @@ final class ContratoVO extends VO {
         $this->id_professor = $id_professor;
     }
 
+    public function getMedia_final() {
+        return $this->media_final;
+    }
+
+    public function setMedia_final($media_final) {
+        $this->media_final = $media_final;
+    }
+
+    public function getSupervisor() {
+        return $this->supervisor;
+    }
+
+    public function setSupervisor($supervisor) {
+        $this->supervisor = $supervisor;
+    }
+
+    public function getS_Cargo() {
+        return $this->s_cargo;
+    }
+
+    public function setS_Cargo($s_cargo) {
+        $this->s_cargo = $s_cargo;
+    }
+
+    public function getS_Telefone() {
+        return $this->s_telefone;
+    }
+
+    public function setS_Telefone($s_telefone) {
+        $this->s_telefone = $s_telefone;
+    }
+
+    public function getS_Email() {
+        return $this->s_email;
+    }
+
+    public function setS_Email($s_email) {
+        $this->s_email = $s_email;
+    }
+
+    public function getObservacao() {
+        return $this->observacao;
+    }
+
+    public function setObservacao($observacao) {
+        $this->observacao = $observacao;
+    }
 }

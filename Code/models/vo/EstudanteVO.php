@@ -7,20 +7,28 @@ final class EstudanteVO extends VO {
     private $nome;
     private $email;
     private $matricula;
+    private $matricula_ativa;
     private $cpf;
     private $rg;
+    private $data_nasc;
+    private $res_nome;
+    private $res_email;
     private $cidade;
     private $endereco;
     private $telefone;
     private $foto;
 
-    public function __construct($id = 0, $nome = "", $email = "", $matricula = "", $cpf = "", $rg = "", $cidade = "", $endereco = "", $telefone = "", $foto = "") {
+    public function __construct($id = 0, $nome = "", $email = "", $matricula = "", $matricula_ativa = false, $cpf = "", $rg = "", $data_nasc = "", $res_nome = "", $res_email = "", $cidade = "", $endereco = "", $telefone = "", $foto = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->email = $email;
         $this->matricula = $matricula;
+        $this->matricula_ativa = $matricula_ativa;
         $this->cpf = $cpf;
         $this->rg = $rg;
+        $this->data_nasc = $data_nasc;
+        $this->res_nome = $res_nome;
+        $this->res_email = $res_email;
         $this->cidade = $cidade;
         $this->endereco = $endereco;
         $this->telefone = $telefone;
@@ -90,6 +98,38 @@ final class EstudanteVO extends VO {
 
     public function setMatricula($matricula) {
         $this->matricula = $matricula;
+    }
+
+    public function getMatriculaAtiva() {
+        return $this->matricula_ativa;
+    }
+
+    public function setMatriculaAtiva($matricula_ativa) {
+        $this->matricula_ativa = $matricula_ativa;
+    }
+
+    public function getDataNasc() {
+        return $this->data_nasc;
+    }
+
+    public function setDataNasc($data_nasc){
+        $this->data_nasc = $data_nasc;
+    }
+
+    public function getResNome() {
+        return $this->res_nome;
+    }
+
+    public function setResNome($res_nome){
+        $this->res_nome = $res_nome;
+    }
+    
+    public function getResEmail() {
+        return $this->res_email;
+    }
+
+    public function setResEmail($res_email){
+        $this->res_email = $res_email;
     }
 
 }
