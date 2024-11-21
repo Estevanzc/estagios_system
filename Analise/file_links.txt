@@ -9,6 +9,7 @@ Draw.io:
      3.1 - Incluir_Estagio - https://drive.google.com/file/d/15pe-Q1GClG6T8Jte6hJjX7lcR56ivck9/view?usp=sharing
      3.2 - Alterar_Estagio - https://drive.google.com/file/d/1oBxMYuUiNX_D3zT4M_g2TMS5_JygGudg/view?usp=sharing
      3.3 - Excluir_Estagio - https://drive.google.com/file/d/1CPb2dt7D3ssUmlfZl-BZ0Kiw_63neD1Z/view?usp=sharing
+ 4 - Diagrama de Classe - https://drive.google.com/file/d/1Hp1NowR6FeDjYvlImV_Hug6yxtV8mGML/view?usp=sharing
 
 Excel:
 
