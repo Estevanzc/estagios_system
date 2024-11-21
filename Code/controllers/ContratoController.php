@@ -22,22 +22,22 @@ final class ContratoController extends Controller {
         if(!empty($id)) {
             $model = new ContratoModel();
             $vo = new ContratoVO($id);
-            $aluno = $model->selectOne($vo);
+            $contrato = $model->selectOne($vo);
         } else {
-            $aluno = new ContratoVO();
+            $contrato = new ContratoVO();
         }
 
         $this->loadView("formContrato", [
-            "contrato" => $aluno
+            "contrato" => $contrato
         ]);
     }
 
     public function save() {
         $id = $_POST["id"];
         $model = new ContratoModel();
-        $vo = new ContratoVO($id, $_POST["nome"], $_POST["matricula"], $_POST["area"], $_POST["data_inicio"], $_POST["data_fim"],
-         $_POST["carga_horaria"], $_POST["media_final"], $_POST["supervisor"], $_POST["s_cargo"], $_POST["s_telefone"],
-         $_POST["s_email"], $_POST["observacao"], $_POST["id_empresa"], $_POST["id_estudante"], $_POST["id_professor"] );
+        $vo = new ContratoVO($id, $_POST["nome"], $_POST["encaminhamento"], $_POST["area"], $_POST["data_inicio"], $_POST["data_fim"],
+         $_POST["media_final"], $_POST["supervisor"], $_POST["s_cargo"], $_POST["s_telefone"],
+         $_POST["s_email"], $_POST["observacao"], $_POST["encerramento"], $_POST["id_empresa"], $_POST["id_estudante"], $_POST["id_professor"] );
 
         if(empty($id)) {
             $result = $model->insert($vo);

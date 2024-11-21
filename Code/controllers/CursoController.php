@@ -22,13 +22,13 @@ final class CursoController extends Controller {
         if(!empty($id)) {
             $model = new CursoModel();
             $vo = new CursoVO($id);
-            $aluno = $model->selectOne($vo);
+            $curso = $model->selectOne($vo);
         } else {
-            $aluno = new CursoVO();
+            $curso = new CursoVO();
         }
 
         $this->loadView("formCurso", [
-            "curso" => $aluno
+            "curso" => $curso
         ]);
     }
 

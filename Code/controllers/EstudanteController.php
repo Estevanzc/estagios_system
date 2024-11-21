@@ -35,8 +35,9 @@ final class EstudanteController extends Controller {
     public function save() {
         $id = $_POST["id"];
         $model = new EstudanteModel();
-        $nome_arquivo = $this->uploadFile($_FILES["foto"], empty($id) ? "" : $model->selectOne(new EstudanteVO($id))->getFoto());
-        $vo = new EstudanteVO($id, $_POST["nome"], $_POST["matricula"], $nome_arquivo);
+        $vo = new EstudanteVO($id, $_POST["nome"], $_POST["email"], $_POST["matricula"], $_POST["matricula_ativa"], $_POST["ano_curso"],
+        $_POST["cpf"], $_POST["rg"], $_POST["data_nasc"], $_POST["res_nome"], $_POST["res_email"], $_POST["cidade"],
+        $_POST["endereco"], $_POST["telefone"], $_POST["id_curso"], $_POST["foto"]);
 
         if(empty($id)) {
             $result = $model->insert($vo);

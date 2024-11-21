@@ -11,8 +11,8 @@ final class ProfessorController extends Controller {
         $model = new ProfessorModel();
         $data = $model->selectAll(new ProfessorVO());
 
-        $this->loadView("listaAlunos", [
-            "alunos" => $data
+        $this->loadView("listaProfessores", [
+            "professores" => $data
         ]);
     }
 
@@ -22,21 +22,21 @@ final class ProfessorController extends Controller {
         if(!empty($id)) {
             $model = new ProfessorModel();
             $vo = new ProfessorVO($id);
-            $aluno = $model->selectOne($vo);
+            $professor = $model->selectOne($vo);
         } else {
-            $aluno = new ProfessorVO();
+            $professor = new ProfessorVO();
         }
 
-        $this->loadView("formAluno", [
-            "aluno" => $aluno
+        $this->loadView("formProfessor", [
+            "professor" => $professor
         ]);
     }
 
     public function save() {
         $id = $_POST["id"];
         $model = new ProfessorModel();
-        $nome_arquivo = $this->uploadFile($_FILES["foto"], empty($id) ? "" : $model->selectOne(new ProfessorVO($id))->getFoto());
-        $vo = new ProfessorVO($id, $_POST["nome"], $_POST["matricula"], $nome_arquivo);
+        $vo = new ProfessorVO($id, $_POST["nome"], $_POST["email"], $_POST["siape"], $_POST["cpf"],
+         $_POST["rg"], $_POST["cidade"], $_POST["endereco"], $_POST["telefone"], $_POST["funcao"], $_POST["foto"] );
 
         if(empty($id)) {
             $result = $model->insert($vo);
@@ -44,7 +44,7 @@ final class ProfessorController extends Controller {
             $result = $model->update($vo);
         }
 
-        $this->redirect("alunos.php");
+        $this->redirect("professores.php");
     }
 
     public function remove() {
@@ -54,7 +54,7 @@ final class ProfessorController extends Controller {
 
         $result = $model->delete($vo);
 
-        $this->redirect("alunos.php");
+        $this->redirect("professores.php");
     }
 
 }

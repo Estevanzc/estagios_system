@@ -11,8 +11,8 @@ final class EmpresaController extends Controller {
         $model = new EmpresaModel();
         $data = $model->selectAll(new EmpresaVO());
 
-        $this->loadView("listaAlunos", [
-            "alunos" => $data
+        $this->loadView("listaEmpresa", [
+            "empresas" => $data
         ]);
     }
 
@@ -22,21 +22,21 @@ final class EmpresaController extends Controller {
         if(!empty($id)) {
             $model = new EmpresaModel();
             $vo = new EmpresaVO($id);
-            $aluno = $model->selectOne($vo);
+            $empresa = $model->selectOne($vo);
         } else {
-            $aluno = new EmpresaVO();
+            $empresa = new EmpresaVO();
         }
 
-        $this->loadView("formAluno", [
-            "aluno" => $aluno
+        $this->loadView("formEmpresa", [
+            "empresa" => $empresa
         ]);
     }
 
     public function save() {
         $id = $_POST["id"];
         $model = new EmpresaModel();
-        $nome_arquivo = $this->uploadFile($_FILES["foto"], empty($id) ? "" : $model->selectOne(new EmpresaVO($id))->getFoto());
-        $vo = new EmpresaVO($id, $_POST["nome"], $_POST["matricula"], $nome_arquivo);
+        $vo = new EmpresaVO($id, $_POST["nome"], $_POST["razao_social"], $_POST["email"], $_POST["cnpj"], $_POST["representante"], $_POST["r_funcao"], $_POST["r_cpf"], $_POST["r_rg"], $_POST["cidade"], $_POST["endereco"], $_POST["telefone"], $_POST["convenio"], $_POST["foto"]);
+
 
         if(empty($id)) {
             $result = $model->insert($vo);
@@ -44,7 +44,7 @@ final class EmpresaController extends Controller {
             $result = $model->update($vo);
         }
 
-        $this->redirect("alunos.php");
+        $this->redirect("empresas.php");
     }
 
     public function remove() {
@@ -54,7 +54,7 @@ final class EmpresaController extends Controller {
 
         $result = $model->delete($vo);
 
-        $this->redirect("alunos.php");
+        $this->redirect("empresas.php");
     }
 
 }
