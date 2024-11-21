@@ -15,8 +15,9 @@ final class EmpresaVO extends VO {
     private $endereco;
     private $telefone;
     private $convenio;
+    private $foto;
 
-    public function __construct($id = 0, $nome = "", $email = "", $cnpj = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "") {
+    public function __construct($id = 0, $nome = "", $email = "", $cnpj = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "", $foto = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->email = $email;
@@ -29,6 +30,7 @@ final class EmpresaVO extends VO {
         $this->endereco = $endereco;
         $this->telefone = $telefone;
         $this->convenio = $convenio;
+        $this->foto = $foto;
     }
 
     public function getNome() {
@@ -109,6 +111,14 @@ final class EmpresaVO extends VO {
 
     public function setConvenio($convenio) {
         $this->convenio = $convenio;
+    }
+
+    public function getFoto() {
+        return $this->foto;
+    }
+
+    public function setFoto($foto) {
+        $this->foto = $foto;
     }
 
 }

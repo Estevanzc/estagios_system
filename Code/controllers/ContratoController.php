@@ -11,8 +11,8 @@ final class ContratoController extends Controller {
         $model = new ContratoModel();
         $data = $model->selectAll(new ContratoVO());
 
-        $this->loadView("listaAlunos", [
-            "alunos" => $data
+        $this->loadView("listaContrato", [
+            "contrato" => $data
         ]);
     }
 
@@ -27,16 +27,17 @@ final class ContratoController extends Controller {
             $aluno = new ContratoVO();
         }
 
-        $this->loadView("formAluno", [
-            "aluno" => $aluno
+        $this->loadView("formContrato", [
+            "contrato" => $aluno
         ]);
     }
 
     public function save() {
         $id = $_POST["id"];
         $model = new ContratoModel();
-        $nome_arquivo = $this->uploadFile($_FILES["foto"], empty($id) ? "" : $model->selectOne(new ContratoVO($id))->getFoto());
-        $vo = new ContratoVO($id, $_POST["nome"], $_POST["matricula"], $nome_arquivo);
+        $vo = new ContratoVO($id, $_POST["nome"], $_POST["matricula"], $_POST["area"], $_POST["data_inicio"], $_POST["data_fim"],
+         $_POST["carga_horaria"], $_POST["media_final"], $_POST["supervisor"], $_POST["s_cargo"], $_POST["s_telefone"],
+         $_POST["s_email"], $_POST["observacao"], $_POST["id_empresa"], $_POST["id_estudante"], $_POST["id_professor"] );
 
         if(empty($id)) {
             $result = $model->insert($vo);
@@ -44,7 +45,7 @@ final class ContratoController extends Controller {
             $result = $model->update($vo);
         }
 
-        $this->redirect("alunos.php");
+        $this->redirect("contratos.php");
     }
 
     public function remove() {
@@ -54,7 +55,7 @@ final class ContratoController extends Controller {
 
         $result = $model->delete($vo);
 
-        $this->redirect("alunos.php");
+        $this->redirect("contratos.php");
     }
 
 }

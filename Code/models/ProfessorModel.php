@@ -110,6 +110,4 @@ final class ProfessorModel extends Model {
         return $db->execute($query, $binds);
     }
 
-
-
 }

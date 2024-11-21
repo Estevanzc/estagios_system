@@ -8,6 +8,7 @@ final class EstudanteVO extends VO {
     private $email;
     private $matricula;
     private $matricula_ativa;
+    private $ano_curso;
     private $cpf;
     private $rg;
     private $data_nasc;
@@ -16,14 +17,18 @@ final class EstudanteVO extends VO {
     private $cidade;
     private $endereco;
     private $telefone;
+    private $id_curso;
     private $foto;
 
-    public function __construct($id = 0, $nome = "", $email = "", $matricula = "", $matricula_ativa = false, $cpf = "", $rg = "", $data_nasc = "", $res_nome = "", $res_email = "", $cidade = "", $endereco = "", $telefone = "", $foto = "") {
+    public function __construct($id = 0, $nome = "", $email = "", $matricula = "", $matricula_ativa = false, $ano_curso = "",
+                                $cpf = "", $rg = "", $data_nasc = "", $res_nome = "", $res_email = "", $cidade = "",
+                                $endereco = "", $telefone = "", $id_curso = 0, $foto = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->email = $email;
         $this->matricula = $matricula;
         $this->matricula_ativa = $matricula_ativa;
+        $this->ano_curso = $ano_curso;
         $this->cpf = $cpf;
         $this->rg = $rg;
         $this->data_nasc = $data_nasc;
@@ -32,6 +37,7 @@ final class EstudanteVO extends VO {
         $this->cidade = $cidade;
         $this->endereco = $endereco;
         $this->telefone = $telefone;
+        $this->id_curso = $id_curso;
         $this->foto = $foto;
     }
 
@@ -100,36 +106,48 @@ final class EstudanteVO extends VO {
         $this->matricula = $matricula;
     }
 
-    public function getMatriculaAtiva() {
+    public function getMatricula_ativa() {
         return $this->matricula_ativa;
     }
 
-    public function setMatriculaAtiva($matricula_ativa) {
+    public function setMatricula_ativa($matricula_ativa) {
         $this->matricula_ativa = $matricula_ativa;
     }
 
-    public function getDataNasc() {
+    public function getData_nasc() {
         return $this->data_nasc;
     }
 
-    public function setDataNasc($data_nasc){
+    public function setData_nasc($data_nasc){
         $this->data_nasc = $data_nasc;
     }
 
-    public function getResNome() {
+    public function getRes_nome() {
         return $this->res_nome;
     }
 
-    public function setResNome($res_nome){
+    public function setRes_nome($res_nome){
         $this->res_nome = $res_nome;
     }
     
-    public function getResEmail() {
+    public function getRes_email() {
         return $this->res_email;
     }
 
-    public function setResEmail($res_email){
+    public function setRes_email($res_email){
         $this->res_email = $res_email;
     }
 
+    public function getId_curso(){
+        return $this->id_curso;
+    }
+    public function setId_curso($id_curso){
+        $this->id_curso = $id_curso;
+    }
+    public function getAno_curso(){
+        return $this->ano_curso;
+    }
+    public function setAno_curso($ano_curso){
+        $this->ano_curso = $ano_curso;
+    }
 }
