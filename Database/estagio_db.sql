@@ -151,6 +151,7 @@ DROP TABLE IF EXISTS `empresas`;
 CREATE TABLE `empresas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
+  `razao_social` varchar(255) not null unique,
   `email` varchar(255) NOT NULL,
   `cnpj` char(14) NOT NULL,
   `representante` varchar(255) NOT NULL,
