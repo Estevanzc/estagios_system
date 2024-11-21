@@ -68,7 +68,6 @@ CREATE TABLE `contratos` (
   `id_empresa` int(11) NOT NULL,
   `id_estudante` int(11) NOT NULL,
   `id_professor` int(11) NOT NULL,
-  `id_curso` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_empresa` (`id_empresa`),
   KEY `id_estudante` (`id_estudante`),
@@ -77,7 +76,6 @@ CREATE TABLE `contratos` (
   CONSTRAINT `contratos_ibfk_1` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id`),
   CONSTRAINT `contratos_ibfk_2` FOREIGN KEY (`id_estudante`) REFERENCES `estudantes` (`id`),
   CONSTRAINT `contratos_ibfk_3` FOREIGN KEY (`id_professor`) REFERENCES `professores` (`id`),
-  CONSTRAINT `contratos_ibfk_4` FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -193,6 +191,7 @@ CREATE TABLE `estudantes` (
   `email` varchar(255) NOT NULL,
   `matricula` char(12) NOT NULL,
   `matricula_ativa` tinyint(1) DEFAULT 0,
+  `data_entrada` date not null,
   `cpf` char(11) NOT NULL,
   `rg` char(9) NOT NULL,
   `data_nasc` date NOT NULL,
@@ -201,7 +200,9 @@ CREATE TABLE `estudantes` (
   `cidade` varchar(255) NOT NULL,
   `endereco` varchar(255) NOT NULL,
   `telefone` varchar(255) NOT NULL,
+  `id_curso` varchar(255) not null,
   `foto` varchar(255) DEFAULT NULL,
+  FOREIGN KEY (`id_curso`) REFERENCES `cursos` (`id`),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `matricula` (`matricula`),
