@@ -20,9 +20,7 @@ final class EstudanteVO extends VO {
     private $id_curso;
     private $foto;
 
-    public function __construct($id = 0, $nome = "", $email = "", $matricula = "", $matricula_ativa = false, $ano_curso = "",
-                                $cpf = "", $rg = "", $data_nasc = "", $res_nome = "", $res_email = "", $cidade = "",
-                                $endereco = "", $telefone = "", $id_curso = 0, $foto = "") {
+    public function __construct($id = 0, $nome = "", $email = "", $matricula = "", $matricula_ativa = false, $ano_curso = "", $cpf = "", $rg = "", $data_nasc = "", $res_nome = "", $res_email = "", $cidade = "", $endereco = "", $telefone = "", $id_curso = 0, $foto = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->email = $email;

@@ -5,6 +5,7 @@ namespace Model\VO;
 final class EmpresaVO extends VO {
     
     private $nome;
+    private $razao_social;
     private $email;
     private $cnpj;
     private $representante;
@@ -17,9 +18,10 @@ final class EmpresaVO extends VO {
     private $convenio;
     private $foto;
 
-    public function __construct($id = 0, $nome = "", $email = "", $cnpj = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "", $foto = "") {
+    public function __construct($id = 0, $nome = "", $razao_social = "", $email = "", $cnpj = "", $representante = "", $r_funcao = "", $r_cpf = "", $r_rg = "", $cidade = "", $endereco = "", $telefone = "", $convenio = "", $foto = "") {
         parent::__construct($id);
         $this->nome = $nome;
+        $this->razao_social = $razao_social;
         $this->email = $email;
         $this->cnpj = $cnpj;
         $this->representante = $representante;
@@ -39,6 +41,13 @@ final class EmpresaVO extends VO {
 
     public function setNome($nome) {
         $this->nome = $nome;
+    }
+    public function getRazao_social() {
+        return $this->razao_social;
+    }
+
+    public function setRazao_social($razao_social) {
+        $this->razao_social = $razao_social;
     }
     public function getEmail() {
         return $this->email;

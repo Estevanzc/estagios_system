@@ -9,31 +9,31 @@ final class ContratoVO extends VO {
     private $area;
     private $data_inicio;
     private $data_fim;
-    private $carga_horaria;
     private $media_final;
     private $supervisor;
     private $s_cargo;
     private $s_telefone;
     private $s_email;
     private $observacao;
+    private $encerramento;
     private $id_empresa;
     private $id_estudante;
     private $id_professor;
 
-    public function __construct($id = 0, $processo = "", $encaminhamento = false, $area = "", $data_inicio = "", $data_fim = "", $carga_horaria = 0, $media_final = 0, $supervisor = "", $s_cargo = "", $s_telefone = "", $s_email = "", $observacao = "", $id_empresa = 0, $id_estudante = 0, $id_professor = 0) {
+    public function __construct($id = 0, $processo = "", $encaminhamento = false, $area = "", $data_inicio = "", $data_fim = "", $media_final = 0, $supervisor = "", $s_cargo = "", $s_telefone = "", $s_email = "", $observacao = "", $encerramento = false, $id_empresa = 0, $id_estudante = 0, $id_professor = 0) {
         parent::__construct($id);
         $this->processo = $processo;
         $this->encaminhamento = $encaminhamento;
         $this->area = $area;
         $this->data_inicio = $data_inicio;
         $this->data_fim = $data_fim;
-        $this->carga_horaria = $carga_horaria;
         $this->media_final = $media_final;
         $this->supervisor = $supervisor;
         $this->s_cargo = $s_cargo;
         $this->s_telefone = $s_telefone;
         $this->s_email = $s_email;
         $this->observacao = $observacao;
+        $this->encerramento = $encerramento;
         $this->id_empresa = $id_empresa;
         $this->id_estudante = $id_estudante;
         $this->id_professor = $id_professor;
@@ -79,20 +79,19 @@ final class ContratoVO extends VO {
         $this->data_fim = $data_fim;
     }
 
-    public function getCarga_horaria() {
-        return $this->carga_horaria;
-    }
-
-    public function setCarga_horaria($carga_horaria) {
-        $this->carga_horaria = $carga_horaria;
-    }
-
     public function getId_empresa() {
         return $this->id_empresa;
     }
 
     public function setId_empresa($id_empresa) {
         $this->id_empresa = $id_empresa;
+    }
+    public function getEncerramento() {
+        return $this->encerramento;
+    }
+
+    public function setEncerramento($encerramento) {
+        $this->encerramento = $encerramento;
     }
 
     public function getId_estudante() {
