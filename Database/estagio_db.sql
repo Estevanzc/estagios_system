@@ -159,6 +159,7 @@ CREATE TABLE `empresas` (
   `endereco` varchar(255) NOT NULL,
   `telefone` varchar(255) NOT NULL,
   `convenio` varchar(255) NOT NULL,
+  `foto` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `razao_social` (`razao_social`),
   UNIQUE KEY `email` (`email`),
