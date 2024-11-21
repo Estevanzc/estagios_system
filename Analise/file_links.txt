@@ -5,6 +5,10 @@ Draw.io:
      1.2 - Finalizar_Estagio - https://drive.google.com/file/d/1CqcrWXL66uvcUD1CjCeZWzOunDtbD3sL/view?usp=sharing
 
  2 - Diagrama_de_casos_de_uso - https://drive.google.com/file/d/1Elqmos57sNIzzCZDmmvGaJ_jlbKr2aS0/view?usp=sharing
+ 3 - Gerenciar_Estagio_Atividade - https://drive.google.com/file/d/19i5gUVmsRBNUmgR_DDmXlcEifcusk5pS/view?usp=sharing
+     3.1 - Incluir_Estagio - https://drive.google.com/file/d/15pe-Q1GClG6T8Jte6hJjX7lcR56ivck9/view?usp=sharing
+     3.2 - Alterar_Estagio - https://drive.google.com/file/d/1oBxMYuUiNX_D3zT4M_g2TMS5_JygGudg/view?usp=sharing
+     3.3 - Excluir_Estagio - https://drive.google.com/file/d/1CPb2dt7D3ssUmlfZl-BZ0Kiw_63neD1Z/view?usp=sharing
 
 Excel:
 
