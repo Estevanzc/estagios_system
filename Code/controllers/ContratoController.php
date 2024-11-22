@@ -11,8 +11,8 @@ final class ContratoController extends Controller {
         $model = new ContratoModel();
         $data = $model->selectAll(new ContratoVO());
 
-        $this->loadView("listaContrato", [
-            "contrato" => $data
+        $this->loadView("listaContratos", [
+            "contratos" => $data
         ]);
     }
 

@@ -11,8 +11,8 @@ final class BancaController extends Controller {
         $model = new BancaModel();
         $data = $model->selectAll(new BancaVO());
 
-        $this->loadView("listaBanca", [
-            "banca" => $data
+        $this->loadView("listaBancas", [
+            "bancas" => $data
         ]);
     }
 

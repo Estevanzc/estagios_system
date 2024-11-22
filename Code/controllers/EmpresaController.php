@@ -11,7 +11,7 @@ final class EmpresaController extends Controller {
         $model = new EmpresaModel();
         $data = $model->selectAll(new EmpresaVO());
 
-        $this->loadView("listaEmpresa", [
+        $this->loadView("listaEmpresas", [
             "empresas" => $data
         ]);
     }
@@ -35,8 +35,8 @@ final class EmpresaController extends Controller {
     public function save() {
         $id = $_POST["id"];
         $model = new EmpresaModel();
-        $vo = new EmpresaVO($id, $_POST["nome"], $_POST["razao_social"], $_POST["email"], $_POST["cnpj"], $_POST["representante"], $_POST["r_funcao"], $_POST["r_cpf"], $_POST["r_rg"], $_POST["cidade"], $_POST["endereco"], $_POST["telefone"], $_POST["convenio"], $_POST["foto"]);
-
+        $nome_arquivo = $this->uploadFile($_FILES["foto"], (empty($id) ? "" : $model->selectOne(new EmpresaVO($id))->getFoto()));
+        $vo = new EmpresaVO($id, $_POST["nome"], $_POST["razao_social"], $_POST["email"], $_POST["cnpj"], $_POST["representante"], $_POST["r_funcao"], $_POST["r_cpf"], $_POST["r_rg"], $_POST["cidade"], $_POST["endereco"], $_POST["telefone"], $_POST["convenio"], $nome_arquivo);
 
         if(empty($id)) {
             $result = $model->insert($vo);

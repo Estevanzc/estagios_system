@@ -11,8 +11,8 @@ final class EstudanteController extends Controller {
         $model = new EstudanteModel();
         $data = $model->selectAll(new EstudanteVO());
 
-        $this->loadView("listaAlunos", [
-            "alunos" => $data
+        $this->loadView("listaEstudantes", [
+            "estudantes" => $data
         ]);
     }
 
@@ -22,22 +22,21 @@ final class EstudanteController extends Controller {
         if(!empty($id)) {
             $model = new EstudanteModel();
             $vo = new EstudanteVO($id);
-            $aluno = $model->selectOne($vo);
+            $estudante = $model->selectOne($vo);
         } else {
-            $aluno = new EstudanteVO();
+            $estudante = new EstudanteVO();
         }
 
-        $this->loadView("formAluno", [
-            "aluno" => $aluno
+        $this->loadView("formEstudante", [
+            "estudante" => $estudante
         ]);
     }
 
     public function save() {
         $id = $_POST["id"];
         $model = new EstudanteModel();
-        $vo = new EstudanteVO($id, $_POST["nome"], $_POST["email"], $_POST["matricula"], $_POST["matricula_ativa"], $_POST["ano_curso"],
-        $_POST["cpf"], $_POST["rg"], $_POST["data_nasc"], $_POST["res_nome"], $_POST["res_email"], $_POST["cidade"],
-        $_POST["endereco"], $_POST["telefone"], $_POST["id_curso"], $_POST["foto"]);
+        $nome_arquivo = $this->uploadFile($_FILES["foto"], (empty($id) ? "" : $model->selectOne(new EstudanteVO($id))->getFoto()));
+        $vo = new EstudanteVO($id, $_POST["nome"], $_POST["email"], $_POST["matricula"], $_POST["matricula_ativa"], $_POST["ano_curso"], $_POST["cpf"], $_POST["rg"], $_POST["data_nasc"], $_POST["res_nome"], $_POST["res_email"], $_POST["cidade"], $_POST["endereco"], $_POST["telefone"], $_POST["id_curso"], $nome_arquivo);
 
         if(empty($id)) {
             $result = $model->insert($vo);
@@ -45,7 +44,7 @@ final class EstudanteController extends Controller {
             $result = $model->update($vo);
         }
 
-        $this->redirect("alunos.php");
+        $this->redirect("estudantes.php");
     }
 
     public function remove() {
@@ -55,7 +54,7 @@ final class EstudanteController extends Controller {
 
         $result = $model->delete($vo);
 
-        $this->redirect("alunos.php");
+        $this->redirect("estudantes.php");
     }
 
 }

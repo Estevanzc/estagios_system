@@ -11,7 +11,7 @@ final class CursoController extends Controller {
         $model = new CursoModel();
         $data = $model->selectAll(new CursoVO());
 
-        $this->loadView("listaCurso", [
+        $this->loadView("listaCursos", [
             "cursos" => $data
         ]);
     }

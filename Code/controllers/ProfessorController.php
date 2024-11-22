@@ -35,8 +35,8 @@ final class ProfessorController extends Controller {
     public function save() {
         $id = $_POST["id"];
         $model = new ProfessorModel();
-        $vo = new ProfessorVO($id, $_POST["nome"], $_POST["email"], $_POST["siape"], $_POST["cpf"],
-         $_POST["rg"], $_POST["cidade"], $_POST["endereco"], $_POST["telefone"], $_POST["funcao"], $_POST["foto"] );
+        $nome_arquivo = $this->uploadFile($_FILES["foto"], (empty($id) ? "" : $model->selectOne(new ProfessorVO($id))->getFoto()));
+        $vo = new ProfessorVO($id, $_POST["nome"], $_POST["email"], $_POST["siape"], $_POST["cpf"], $_POST["rg"], $_POST["cidade"], $_POST["endereco"], $_POST["telefone"], $_POST["funcao"], $nome_arquivo);
 
         if(empty($id)) {
             $result = $model->insert($vo);

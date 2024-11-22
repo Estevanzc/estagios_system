@@ -13,7 +13,7 @@ abstract class Controller {
             exit();
         }
         if ($restricted) {
-            if ($_SESSION["usuario"]->getNivel() < 2) {
+            if ($_SESSION["usuario"]->getNivel() < 4) {
                 $this->redirect("index.php");
                 exit();
             }

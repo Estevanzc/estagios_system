@@ -77,6 +77,7 @@ final class EmpresaModel extends Model {
         $db = new Connection();
         $query = "DELETE FROM empresa WHERE id = :id";
         $binds = ["id" => $vo->getId()];
+        (new EmpresaController())->deleteFile($vo->getFoto());
 
         return $db->execute($query, $binds);
     }
