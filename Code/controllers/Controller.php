@@ -3,7 +3,7 @@
 namespace Controller;
 
 abstract class Controller {
-    public function __construct($obriga_login = false, $restricted = false) {
+    public function __construct($obriga_login = false, $restricted = 0) {
         if (!isset($_SESSION)) {
             session_start();
             session_regenerate_id();
@@ -12,11 +12,11 @@ abstract class Controller {
             $this->redirect("login.php");
             exit();
         }
-        if ($restricted) {
+        if ($restricted != 0) {/*
             if ($_SESSION["usuario"]->getNivel() < 2) {
                 $this->redirect("index.php");
                 exit();
-            }
+            }*/
         }
     }
     public function uploadFile($file, $old_file = "") {
