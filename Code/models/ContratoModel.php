@@ -62,6 +62,7 @@ final class ContratoModel extends Model
         $db = new Connection();
         $query = "UPDATE contrato SET processo=:processo, encaminhamento=:encaminhamento, area=:area, data_inicio=:data_inicio, data_fim=:data_fim, media_final=:media_final, supervisor=:supervisor, s_cargo=:s_cargo, s_telefone=:s_telefone, s_email=:s_email, observacao=:observacao, encerramento=:encerramento, id_empresa=:id_empresa, id_estudante=:id_estudante, id_professor=:id_professor WHERE id = :id";
         $binds = [
+            "id" => $vo->getId(),
             "processo" => $vo->getProcesso(),
             "encaminhamento" => $vo->getEncaminhamento(),
             "area" => $vo->getArea(),

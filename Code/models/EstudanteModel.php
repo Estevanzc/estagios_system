@@ -95,6 +95,7 @@ final class EstudanteModel extends Model {
             cidade=:cidade, endereco=:endereco, telefone=:telefone, id_curso=:id_curso WHERE id = :id";
             
             $binds = [
+                "id" => $vo->getId(),
                 "nome" => $vo->getNome(),
                 "email" => $vo->getEmail(),
                 "matricula" => $vo->getMatricula(),
@@ -116,6 +117,7 @@ final class EstudanteModel extends Model {
             cidade=:cidade, endereco=:endereco, telefone=:telefone, id_curso=:id_curso, foto=:foto WHERE id = :id";
             
             $binds = [
+                "id" => $vo->getId(),
                 "nome" => $vo->getNome(),
                 "email" => $vo->getEmail(),
                 "matricula" => $vo->getMatricula(),

@@ -52,6 +52,7 @@ final class BancaModel extends Model
         $db = new Connection();
         $query = "UPDATE bancas SET nome=:nome, email=:email, id_contrato=:id_contrato WHERE id = :id";
         $binds = [
+            "id" => $vo->getId(),
             "nome" => $vo->getNome(),
             "email" => $vo->getEmail(),
             "id_contrato" => $vo->getId_contrato()

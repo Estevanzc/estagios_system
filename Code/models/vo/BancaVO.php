@@ -16,22 +16,22 @@ final class BancaVO extends VO {
     }
 
     public function getNome() { 
-        return $this->nome; 
+        return $this->nome;
     }
-    public function setNome($nome) { 
-        $this->nome = $nome; 
+    public function setNome($nome) {
+        $this->nome = $nome;
     }
     public function getEmail() { 
-        return $this->email; 
+        return $this->email;
     }
     public function setEmail($email) { 
-        $this->email = $email; 
+        $this->email = $email;
     }
     public function getId_contrato() { 
-        return $this->id_contrato; 
+        return $this->id_contrato;
     }
     public function setId_contrato($id_contrato) { 
-        $this->id_contrato = $id_contrato; 
+        $this->id_contrato = $id_contrato;
     }
 
 }
