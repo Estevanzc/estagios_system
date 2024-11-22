@@ -5,7 +5,7 @@ namespace Controller;
 use Model\BancaModel;
 use Model\VO\BancaVO;
 
-final class ContratoController extends Controller {
+final class BancaController extends Controller {
 
     public function list() {
         $model = new BancaModel();
