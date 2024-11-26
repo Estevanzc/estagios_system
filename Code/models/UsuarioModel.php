@@ -66,9 +66,8 @@ final class UsuarioModel extends Model {
 
     public function delete($vo) {
         $db = new Connection();
-        $query = "DELETE FROM usuarios WHERE id = :id";
-        $binds = ["id" => $vo->getId()];
-        (new UsuarioController())->deleteFile($vo->getFoto());
+        $query = "DELETE FROM usuarios WHERE login = :login";
+        $binds = ["login" => $vo->getLogin()];
 
         return $db->execute($query, $binds);
     }

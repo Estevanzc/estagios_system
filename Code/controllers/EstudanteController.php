@@ -3,7 +3,9 @@
 namespace Controller;
 
 use Model\EstudanteModel;
+use Model\CursoModel;
 use Model\VO\EstudanteVO;
+use Model\VO\CursoVO;
 
 final class EstudanteController extends Controller {
 
@@ -11,8 +13,10 @@ final class EstudanteController extends Controller {
         $model = new EstudanteModel();
         $data = $model->selectAll(new EstudanteVO());
 
+        $curso = (new CursoModel())->selectAll(new CursoVO());
         $this->loadView("listaEstudantes", [
-            "estudantes" => $data
+            "estudantes" => $data,
+            "curso" => $curso,
         ]);
     }
 
@@ -27,8 +31,10 @@ final class EstudanteController extends Controller {
             $estudante = new EstudanteVO();
         }
 
+        $curso = (new CursoModel())->selectOne((int) $estudante["id_curso"]);
         $this->loadView("formEstudante", [
-            "estudante" => $estudante
+            "estudante" => $estudante,
+            "curso" => $curso,
         ]);
     }
 
@@ -40,6 +46,7 @@ final class EstudanteController extends Controller {
 
         if(empty($id)) {
             $result = $model->insert($vo);
+            (new UsuarioModel())->insert(new UsuarioVO(null, $vo["email"], $vo["cpf"], 1, $nome_arquivo));
         } else {
             $result = $model->update($vo);
         }
@@ -51,6 +58,7 @@ final class EstudanteController extends Controller {
         $vo = new EstudanteVO($_GET["id"]);
         $model = new EstudanteModel();
         $vo = $model->selectOne($vo);
+        (new UsuarioModel())->delete(new UsuarioVO(null, $vo["email"]));
 
         $result = $model->delete($vo);
 

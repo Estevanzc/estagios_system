@@ -9,7 +9,7 @@ final class EmpresaModel extends Model {
 
     public function selectAll($vo) {
         $db = new Connection();
-        $query = "SELECT * FROM empresa";
+        $query = "SELECT * FROM empresas";
         $data = $db->select($query);
 
         $arrayDados = [];
@@ -24,7 +24,7 @@ final class EmpresaModel extends Model {
 
     public function selectOne($vo) {
         $db = new Connection();
-        $query = "SELECT * FROM empresa WHERE id = :id";
+        $query = "SELECT * FROM empresas WHERE id = :id";
         $binds = ["id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
@@ -33,7 +33,7 @@ final class EmpresaModel extends Model {
 
     public function insert($vo) {
         $db = new Connection();
-        $query = "INSERT INTO empresa VALUES (default, :nome, :razao_social, :email, :cnpj, :representante, :r_funcao, :r_cpf, :r_rg, :cidade, :endereco, :telefone, :convenio)";
+        $query = "INSERT INTO empresas VALUES (default, :nome, :razao_social, :email, :cnpj, :representante, :r_funcao, :r_cpf, :r_rg, :cidade, :endereco, :telefone, :convenio)";
         $binds = [
             "nome" => $vo->getNome(),
             "razao_social" => $vo->getRazao_social(),
@@ -53,7 +53,7 @@ final class EmpresaModel extends Model {
 
     public function update($vo) {
         $db = new Connection();
-        $query = "UPDATE empresa SET nome=:nome, razao_social=:razao_social, email=:email, cnpj=:cnpj, representante=:representante, r_funcao=:r_funcao, r_cpf=:r_cpf, r_rg=:r_rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, convenio=:convenio WHERE id = :id";
+        $query = "UPDATE empresas SET nome=:nome, razao_social=:razao_social, email=:email, cnpj=:cnpj, representante=:representante, r_funcao=:r_funcao, r_cpf=:r_cpf, r_rg=:r_rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, convenio=:convenio WHERE id = :id";
         $binds = [
             "id" => $vo->getId(),
             "nome" => $vo->getNome(),
@@ -75,7 +75,7 @@ final class EmpresaModel extends Model {
 
     public function delete($vo) {
         $db = new Connection();
-        $query = "DELETE FROM empresa WHERE id = :id";
+        $query = "DELETE FROM empresas WHERE id = :id";
         $binds = ["id" => $vo->getId()];
         (new EmpresaController())->deleteFile($vo->getFoto());
 

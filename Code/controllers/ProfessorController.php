@@ -40,6 +40,7 @@ final class ProfessorController extends Controller {
 
         if(empty($id)) {
             $result = $model->insert($vo);
+            (new UsuarioModel())->insert(new UsuarioVO(null, $vo["email"], $vo["cpf"], 2, $nome_arquivo));
         } else {
             $result = $model->update($vo);
         }
@@ -51,6 +52,7 @@ final class ProfessorController extends Controller {
         $vo = new ProfessorVO($_GET["id"]);
         $model = new ProfessorModel();
         $vo = $model->selectOne($vo);
+        (new UsuarioModel())->delete(new UsuarioVO(null, $vo["email"]));
 
         $result = $model->delete($vo);
 

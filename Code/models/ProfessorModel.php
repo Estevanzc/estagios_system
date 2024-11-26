@@ -9,7 +9,7 @@ final class ProfessorModel extends Model {
 
     public function selectAll($vo) {
         $db = new Connection();
-        $query = "SELECT * FROM alunos";
+        $query = "SELECT * FROM professores";
         $data = $db->select($query);
 
         $arrayDados = [];
@@ -24,7 +24,7 @@ final class ProfessorModel extends Model {
 
     public function selectOne($vo) {
         $db = new Connection();
-        $query = "SELECT * FROM alunos WHERE id = :id";
+        $query = "SELECT * FROM professores WHERE id = :id";
         $binds = ["id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
@@ -34,7 +34,7 @@ final class ProfessorModel extends Model {
     public function insert($vo) {
         $db = new Connection();
         if (empty($vo->getFoto())) {
-            $query = "INSERT INTO alunos VALUES (default, :nome, :email, :siape, :cpf, :rg, :cidade, :endereco, :telefone, :funcao)";
+            $query = "INSERT INTO professores VALUES (default, :nome, :email, :siape, :cpf, :rg, :cidade, :endereco, :telefone, :funcao)";
             $binds = [
                 "nome" => $vo->getNome(),
                 "email" => $vo->getEmail(),
@@ -47,7 +47,7 @@ final class ProfessorModel extends Model {
                 "funcao" => $vo->getFuncao(),
             ];
         } else {
-            $query = "INSERT INTO alunos VALUES (default, :nome, :email, :siape, :cpf, :rg, :cidade, :endereco, :telefone, :funcao, :foto)";
+            $query = "INSERT INTO professores VALUES (default, :nome, :email, :siape, :cpf, :rg, :cidade, :endereco, :telefone, :funcao, :foto)";
             $binds = [
                 "nome" => $vo->getNome(),
                 "email" => $vo->getEmail(),
@@ -68,7 +68,7 @@ final class ProfessorModel extends Model {
     public function update($vo) {
         $db = new Connection();
         if (empty($vo->getFoto())) {
-            $query = "UPDATE alunos SET nome=:nome, email=:email, siape=:siape, cpf=:cpf, rg=:rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, funcao=:funcao WHERE id = :id";
+            $query = "UPDATE professores SET nome=:nome, email=:email, siape=:siape, cpf=:cpf, rg=:rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, funcao=:funcao WHERE id = :id";
             $binds = [
                 "id" => $vo->getId(),
                 "nome" => $vo->getNome(),
@@ -82,7 +82,7 @@ final class ProfessorModel extends Model {
                 "funcao" => $vo->getFuncao(),
             ];
         } else {
-            $query = "UPDATE alunos SET nome=:nome, email=:email, siape=:siape, cpf=:cpf, rg=:rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, funcao=:funcao, foto=:foto WHERE id = :id";
+            $query = "UPDATE professores SET nome=:nome, email=:email, siape=:siape, cpf=:cpf, rg=:rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, funcao=:funcao, foto=:foto WHERE id = :id";
             $binds = [
                 "id" => $vo->getId(),
                 "nome" => $vo->getNome(),
@@ -103,7 +103,7 @@ final class ProfessorModel extends Model {
 
     public function delete($vo) {
         $db = new Connection();
-        $query = "DELETE FROM alunos WHERE id = :id";
+        $query = "DELETE FROM professores WHERE id = :id";
         $binds = ["id" => $vo->getId()];
         (new ProfessorController())->deleteFile($vo->getFoto());
 

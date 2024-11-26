@@ -9,16 +9,13 @@ final class EstudanteModel extends Model {
 
     public function selectAll($vo) {
         $db = new Connection();
-        $query = "SELECT * FROM estudante";
+        $query = "SELECT * FROM estudantes";
         $data = $db->select($query);
 
         $arrayDados = [];
 
         foreach($data as $row) {
-            $vo = new EstudanteVO($row["id"], $row["nome"], $row["email"], $row["matricula"], $row["matricula_ativa"], 
-                                $row["ano_curso"], $row["cpf"], $row["rg"], $row["data_nasc"], $row["res_nome"],
-                                $row["res_email"], $row["cidade"],$row["endereco"],$row["telefone"],
-                                $row["id_curso"], $row["foto"]);
+            $vo = new EstudanteVO($row["id"], $row["nome"], $row["email"], $row["matricula"], $row["matricula_ativa"],  $row["ano_curso"], $row["cpf"], $row["rg"], $row["data_nasc"], $row["res_nome"], $row["res_email"], $row["cidade"],$row["endereco"],$row["telefone"], $row["id_curso"], $row["foto"]);
             array_push($arrayDados, $vo);
         }
 
@@ -27,7 +24,7 @@ final class EstudanteModel extends Model {
 
     public function selectOne($vo) {
         $db = new Connection();
-        $query = "SELECT * FROM estudante WHERE id = :id";
+        $query = "SELECT * FROM estudantes WHERE id = :id";
         $binds = ["id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
@@ -40,7 +37,7 @@ final class EstudanteModel extends Model {
     public function insert($vo) {
         $db = new Connection();
         if (empty($vo->getFoto())) {
-            $query = "INSERT INTO estudante VALUES 
+            $query = "INSERT INTO estudantes VALUES 
             (default, :nome, :email, :matricula, :matricula_ativa, :ano_curso, :cpf, :rg, :data_nasc,
             :res_nome, :res_email, :cidade, :endereco, :telefone, :id_curso)";
             
@@ -61,7 +58,7 @@ final class EstudanteModel extends Model {
                 "id_curso" => $vo->getId_curso()
             ];
         } else {
-            $query = "INSERT INTO estudante VALUES 
+            $query = "INSERT INTO estudantes VALUES 
             (default, :nome, :email, :matricula, :matricula_ativa, :ano_curso, :cpf, :rg, :data_nasc,
             :res_nome, :res_email, :cidade, :endereco, :telefone, :id_curso, :foto)";
             
@@ -90,7 +87,7 @@ final class EstudanteModel extends Model {
     public function update($vo) {
         $db = new Connection();
         if (empty($vo->getFoto())) {
-            $query = "UPDATE estudante SET nome=:nome, email=:email, matricula=:matricula, matricula_ativa=:matricula_ativa,
+            $query = "UPDATE estudantes SET nome=:nome, email=:email, matricula=:matricula, matricula_ativa=:matricula_ativa,
             ano_curso=:ano_curso, cpf=:cpf, rg=:rg, data_nasc=:data_nasc, res_nome=:res_nome, res_email=:res_email, 
             cidade=:cidade, endereco=:endereco, telefone=:telefone, id_curso=:id_curso WHERE id = :id";
             
@@ -112,7 +109,7 @@ final class EstudanteModel extends Model {
                 "id_curso" => $vo->getId_curso()
             ];
         } else {
-            $query = "UPDATE estudante SET nome=:nome, email=:email, matricula=:matricula, matricula_ativa=:matricula_ativa,
+            $query = "UPDATE estudantes SET nome=:nome, email=:email, matricula=:matricula, matricula_ativa=:matricula_ativa,
             ano_curso=:ano_curso, cpf=:cpf, rg=:rg, data_nasc=:data_nasc, res_nome=:res_nome, res_email=:res_email, 
             cidade=:cidade, endereco=:endereco, telefone=:telefone, id_curso=:id_curso, foto=:foto WHERE id = :id";
             
@@ -141,7 +138,7 @@ final class EstudanteModel extends Model {
 
     public function delete($vo) {
         $db = new Connection();
-        $query = "DELETE FROM estudante WHERE id = :id";
+        $query = "DELETE FROM estudantes WHERE id = :id";
         $binds = ["id" => $vo->getId()];
         (new EstudanteController())->deleteFile($vo->getFoto());
 

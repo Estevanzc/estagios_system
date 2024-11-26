@@ -11,7 +11,7 @@ final class ContratoModel extends Model
     public function selectAll($vo)
     {
         $db = new Connection();
-        $query = "SELECT * FROM contrato";
+        $query = "SELECT * FROM contratos";
         $data = $db->select($query);
 
         $arrayDados = [];
@@ -27,7 +27,7 @@ final class ContratoModel extends Model
     public function selectOne($vo)
     {
         $db = new Connection();
-        $query = "SELECT * FROM contrato WHERE id = :id";
+        $query = "SELECT * FROM contratos WHERE id = :id";
         $binds = ["id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
@@ -37,7 +37,7 @@ final class ContratoModel extends Model
     public function insert($vo)
     {
         $db = new Connection();
-        $query = "INSERT INTO contrato VALUES (default, :processo, :encaminhamento, :area, :data_inicio, :data_fim, :media_final, :supervisor, :s_cargo, :s_telefone, :s_email, :observacao, :encerramento, :id_empresa, :id_estudante, :id_professor)";
+        $query = "INSERT INTO contratos VALUES (default, :processo, :encaminhamento, :area, :data_inicio, :data_fim, :media_final, :supervisor, :s_cargo, :s_telefone, :s_email, :observacao, :encerramento, :id_empresa, :id_estudante, :id_professor)";
         $binds = [
             "processo" => $vo->getProcesso(),
             "encaminhamento" => $vo->getEncaminhamento(),
@@ -60,7 +60,7 @@ final class ContratoModel extends Model
     public function update($vo)
     {
         $db = new Connection();
-        $query = "UPDATE contrato SET processo=:processo, encaminhamento=:encaminhamento, area=:area, data_inicio=:data_inicio, data_fim=:data_fim, media_final=:media_final, supervisor=:supervisor, s_cargo=:s_cargo, s_telefone=:s_telefone, s_email=:s_email, observacao=:observacao, encerramento=:encerramento, id_empresa=:id_empresa, id_estudante=:id_estudante, id_professor=:id_professor WHERE id = :id";
+        $query = "UPDATE contratos SET processo=:processo, encaminhamento=:encaminhamento, area=:area, data_inicio=:data_inicio, data_fim=:data_fim, media_final=:media_final, supervisor=:supervisor, s_cargo=:s_cargo, s_telefone=:s_telefone, s_email=:s_email, observacao=:observacao, encerramento=:encerramento, id_empresa=:id_empresa, id_estudante=:id_estudante, id_professor=:id_professor WHERE id = :id";
         $binds = [
             "id" => $vo->getId(),
             "processo" => $vo->getProcesso(),
@@ -83,7 +83,7 @@ final class ContratoModel extends Model
     public function delete($vo)
     {
         $db = new Connection();
-        $query = "DELETE FROM contrato WHERE id = :id";
+        $query = "DELETE FROM contratos WHERE id = :id";
         $binds = ["id" => $vo->getId()];
 
         return $db->execute($query, $binds);

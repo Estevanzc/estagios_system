@@ -3,7 +3,9 @@
 namespace Controller;
 
 use Model\EmpresaModel;
+use Model\UsuarioModel;
 use Model\VO\EmpresaVO;
+use Model\VO\UsuarioVO;
 
 final class EmpresaController extends Controller {
 
@@ -40,6 +42,7 @@ final class EmpresaController extends Controller {
 
         if(empty($id)) {
             $result = $model->insert($vo);
+            (new UsuarioModel())->insert(new UsuarioVO(null, $vo["email"], $vo["cnpj"], 3, $nome_arquivo));
         } else {
             $result = $model->update($vo);
         }
@@ -51,6 +54,7 @@ final class EmpresaController extends Controller {
         $vo = new EmpresaVO($_GET["id"]);
         $model = new EmpresaModel();
         $vo = $model->selectOne($vo);
+        (new UsuarioModel())->delete(new UsuarioVO(null, $vo["email"]));
 
         $result = $model->delete($vo);
 
