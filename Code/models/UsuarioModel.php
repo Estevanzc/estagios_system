@@ -30,6 +30,13 @@ final class UsuarioModel extends Model {
 
         return new UsuarioVO($data[0]["id"], $data[0]["login"], $data[0]["senha"], $data[0]["nivel"], $data[0]["foto"]);
     }
+    public function selectByemail($email) {
+        $db = new Connection();
+        $query = "SELECT id FROM usuarios WHERE login=:login";
+        $binds = ["login" => $email];
+        $data = $db->select($query, $binds);
+        return (int) $data[0]["id"];
+    }
 
     public function insert($vo) {
         $db = new Connection();

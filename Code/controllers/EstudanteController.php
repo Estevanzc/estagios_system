@@ -3,8 +3,10 @@
 namespace Controller;
 
 use Model\EstudanteModel;
+use Model\UsuarioModel;
 use Model\CursoModel;
 use Model\VO\EstudanteVO;
+use Model\VO\UsuarioVO;
 use Model\VO\CursoVO;
 
 final class EstudanteController extends Controller {
@@ -48,7 +50,9 @@ final class EstudanteController extends Controller {
             $result = $model->insert($vo);
             (new UsuarioModel())->insert(new UsuarioVO(null, $vo["email"], $vo["cpf"], 1, $nome_arquivo));
         } else {
+            $id_usuario = (new UsuarioModel())->selectByemail($model->selectOne($vo)["email"]);
             $result = $model->update($vo);
+            (new UsuarioModel())->update(new UsuarioVO($id_usuario, $vo->getEmail(), null, 1, $vo->getFoto()));
         }
 
         $this->redirect("estudantes.php");

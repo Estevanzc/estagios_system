@@ -33,33 +33,20 @@ final class ProfessorModel extends Model {
 
     public function insert($vo) {
         $db = new Connection();
-        if (empty($vo->getFoto())) {
-            $query = "INSERT INTO professores VALUES (default, :nome, :email, :siape, :cpf, :rg, :cidade, :endereco, :telefone, :funcao)";
-            $binds = [
-                "nome" => $vo->getNome(),
-                "email" => $vo->getEmail(),
-                "siape" => $vo->getSiape(),
-                "cpf" => $vo->getCpf(),
-                "rg" => $vo->getRg(),
-                "cidade" => $vo->getCidade(),
-                "endereco" => $vo->getEndereco(),
-                "telefone" => $vo->getTelefone(),
-                "funcao" => $vo->getFuncao(),
-            ];
-        } else {
-            $query = "INSERT INTO professores VALUES (default, :nome, :email, :siape, :cpf, :rg, :cidade, :endereco, :telefone, :funcao, :foto)";
-            $binds = [
-                "nome" => $vo->getNome(),
-                "email" => $vo->getEmail(),
-                "siape" => $vo->getSiape(),
-                "cpf" => $vo->getCpf(),
-                "rg" => $vo->getRg(),
-                "cidade" => $vo->getCidade(),
-                "endereco" => $vo->getEndereco(),
-                "telefone" => $vo->getTelefone(),
-                "funcao" => $vo->getFuncao(),
-                "foto" => $vo->getFoto(),
-            ];
+        $query = "INSERT INTO professores VALUES (default, :nome, :email, :siape, :cpf, :rg, :cidade, :endereco, :telefone, :funcao".(empty($vo->getFoto()) ? "" : ", :foto").")";
+        $binds = [
+            "nome" => $vo->getNome(),
+            "email" => $vo->getEmail(),
+            "siape" => $vo->getSiape(),
+            "cpf" => $vo->getCpf(),
+            "rg" => $vo->getRg(),
+            "cidade" => $vo->getCidade(),
+            "endereco" => $vo->getEndereco(),
+            "telefone" => $vo->getTelefone(),
+            "funcao" => $vo->getFuncao(),
+        ];
+        if (!empty($vo->getFoto())) {
+            $binds["foto"] = $vo->getFoto();
         }
 
         return $db->execute($query, $binds);
@@ -67,35 +54,21 @@ final class ProfessorModel extends Model {
 
     public function update($vo) {
         $db = new Connection();
-        if (empty($vo->getFoto())) {
-            $query = "UPDATE professores SET nome=:nome, email=:email, siape=:siape, cpf=:cpf, rg=:rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, funcao=:funcao WHERE id = :id";
-            $binds = [
-                "id" => $vo->getId(),
-                "nome" => $vo->getNome(),
-                "email" => $vo->getEmail(),
-                "siape" => $vo->getSiape(),
-                "cpf" => $vo->getCpf(),
-                "rg" => $vo->getRg(),
-                "cidade" => $vo->getCidade(),
-                "endereco" => $vo->getEndereco(),
-                "telefone" => $vo->getTelefone(),
-                "funcao" => $vo->getFuncao(),
-            ];
-        } else {
-            $query = "UPDATE professores SET nome=:nome, email=:email, siape=:siape, cpf=:cpf, rg=:rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, funcao=:funcao, foto=:foto WHERE id = :id";
-            $binds = [
-                "id" => $vo->getId(),
-                "nome" => $vo->getNome(),
-                "email" => $vo->getEmail(),
-                "siape" => $vo->getSiape(),
-                "cpf" => $vo->getCpf(),
-                "rg" => $vo->getRg(),
-                "cidade" => $vo->getCidade(),
-                "endereco" => $vo->getEndereco(),
-                "telefone" => $vo->getTelefone(),
-                "funcao" => $vo->getFuncao(),
-                "foto" => $vo->getFoto(),
-            ];
+        $query = "UPDATE professores SET nome=:nome, email=:email, siape=:siape, cpf=:cpf, rg=:rg, cidade=:cidade, endereco=:endereco, telefone=:telefone, funcao=:funcao".(empty($vo->getFoto()) ? "" : ", foto=:foto")." WHERE id = :id";
+        $binds = [
+            "id" => $vo->getId(),
+            "nome" => $vo->getNome(),
+            "email" => $vo->getEmail(),
+            "siape" => $vo->getSiape(),
+            "cpf" => $vo->getCpf(),
+            "rg" => $vo->getRg(),
+            "cidade" => $vo->getCidade(),
+            "endereco" => $vo->getEndereco(),
+            "telefone" => $vo->getTelefone(),
+            "funcao" => $vo->getFuncao(),
+        ];
+        if (!empty($vo->getFoto())) {
+            $binds["foto"] = $vo->getFoto();
         }
 
         return $db->execute($query, $binds);
