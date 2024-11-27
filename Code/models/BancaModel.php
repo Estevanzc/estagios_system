@@ -33,6 +33,19 @@ final class BancaModel extends Model
 
         return new BancaVO($data[0]["id"], $data[0]["nome"], $data[0]["email"], $data[0]["id_contrato"]);
     }
+    public function selectBycontrato($id_contrato) {
+        $db = new Connection();
+        $query = "SELECT * FROM bancas WHERE id_contrato=:id_contrato";
+        $binds = ["id_contrato" => $id_contrato];
+        $data = $db->select($query, $binds);
+        
+        $arrayDados = [];
+        foreach ($data as $row) {
+            $vo = new BancaVO($row["id"], $row["nome"], $row["email"], $row["id_contrato"]);
+            array_push($arrayDados, $vo);
+        }
+        return $arrayDados;
+    }
 
     public function insert($vo)
     {

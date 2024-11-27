@@ -5,6 +5,8 @@ namespace Controller;
 use Model\ContratoModel;
 use Model\EstudanteModel;
 use Model\ProfessorModel;
+use Model\DocumentoModel;
+use Model\BancaModel;
 use Model\EmpresaModel;
 use Model\VO\EstudanteVO;
 use Model\VO\ProfessorVO;
@@ -17,14 +19,26 @@ final class ContratoController extends Controller {
         $model = new ContratoModel();
         $data = $model->selectAll(new ContratoVO());
 
+        $this->loadView("listaContratos", [
+            "contratos" => $data
+        ]);
+    }
+    public function listOne($id_contrato) {
+        $model = new ContratoModel();
+        $data = $model->selectOne(new ContratoVO($id_contrato));
+
         $estudante = (new EstudanteModel())->selectAll(new EstudanteVO());
         $empresa = (new EmpresaModel())->selectAll(new EmpresaVO());
         $professor = (new ProfessorModel())->selectAll(new ProfessorVO());
-        $this->loadView("listaContratos", [
+        $bancas = (new BancaModel())->selectBycontrato($data->getId());
+        $documentos = (new DocumentoModel())->selectBycontrato($data->getId());
+        $this->loadView("infoContrato", [
             "contratos" => $data,
             "estudante" => $estudante,
             "professor" => $professor,
-            "empresa" => $empresa
+            "empresa" => $empresa,
+            "bancas" => $bancas,
+            "documentos" => $documentos
         ]);
     }
 
