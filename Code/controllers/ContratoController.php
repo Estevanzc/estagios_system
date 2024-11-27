@@ -19,8 +19,14 @@ final class ContratoController extends Controller {
         $model = new ContratoModel();
         $data = $model->selectAll(new ContratoVO());
 
+        $estudante = (new EstudanteModel())->selectAll(new EstudanteVO());
+        $empresa = (new EmpresaModel())->selectAll(new EmpresaVO());
+        $professor = (new ProfessorModel())->selectAll(new ProfessorVO());
         $this->loadView("listaContratos", [
-            "contratos" => $data
+            "contratos" => $data,
+            "estudante" => $estudante,
+            "professor" => $professor,
+            "empresa" => $empresa
         ]);
     }
     public function listOne($id_contrato) {
