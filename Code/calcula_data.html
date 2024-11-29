@@ -9,47 +9,45 @@
     <input type="number" id="semanal" name="semanal" value="0" min="1" max="40">
     <span id="carga_horaria_max">Máximo: 40 horas semanais</span>
     <br>
-    <span data-carga="200"></span>  <!-- Dentro de "data-carga", deve ser a carga do curso correspondente -->
-    <br>
-    <button type="button" onclick="calculaDataFinal()">Salvar...sla</button>
+    <span data-carga="200"></span>
 </form>
 
 <script>
-    const calculaDataFinal = () => {
-    const dataInicioInput = document.getElementById('data_inicio');
-    const cargaHorariaInput = document.getElementById('semanal');
-    const dataFinalInput = document.getElementById('data_final');
-    const cargaCurso = document.querySelector('span[data-carga]').getAttribute('data-carga');
+    document.getElementById('data_inicio').addEventListener('change', calculaDataFinal);
+    document.getElementById('semanal').addEventListener('change', calculaDataFinal);
 
-    const dataAtual = new Date();
-    dataAtual.setHours(0, 0, 0, 0);
+    function calculaDataFinal() {
+        const dataInicioInput = document.getElementById('data_inicio');
+        const cargaHorariaInput = document.getElementById('semanal');
+        const dataFinalInput = document.getElementById('data_final');
+        const cargaCurso = parseInt(document.querySelector('span[data-carga]').getAttribute('data-carga'));
 
-    const dataInicio = new Date(dataInicioInput.value);
-    const cargaHorariaSemanal = parseInt(cargaHorariaInput.value);
+        if (!dataInicioInput.value || cargaHorariaInput.value === '0') {
+            dataFinalInput.value = '';
+            return;
+        }
 
-    if (!dataInicioInput.value || dataInicio < dataAtual) {
-        alert("A data inicial deve ser maior que a data atual.");
-        return;
+        const dataInicio = new Date(dataInicioInput.value);
+        const cargaHorariaSemanal = parseInt(cargaHorariaInput.value);
+
+        const dataAtual = new Date();
+        dataAtual.setHours(0, 0, 0, 0);
+
+        if (dataInicio < dataAtual) {
+            alert("A data inicial deve ser maior que a data atual.");
+            return;
+        }
+
+        if (cargaHorariaSemanal <= 0 || cargaHorariaSemanal > 40) {
+            alert("A carga horária semanal deve ser entre 1 e 40 horas.");
+            return;
+        }
+
+        const semanasNecessarias = Math.ceil(cargaCurso / cargaHorariaSemanal);
+        const dataFinal = new Date(dataInicio);
+        dataFinal.setDate(dataFinal.getDate() + semanasNecessarias * 7);
+
+        const dataFinalFormatada = dataFinal.toISOString().split('T')[0];
+        dataFinalInput.value = dataFinalFormatada;
     }
-
-    if (cargaHorariaSemanal <= 0 || cargaHorariaSemanal > 40) {
-        alert("A carga horária semanal deve ser entre 1 e 40 horas.");
-        return;
-    }
-
-    const cargaTotalCurso = parseInt(cargaCurso);
-
-    const horasPorDia = 8;
-    const diasPorSemana = 5;
-    const horasTotalSemanal = cargaHorariaSemanal;
-
-    let semanasNecessarias = Math.ceil(cargaTotalCurso / horasTotalSemanal);
-
-    let dataFinal = new Date(dataInicio);
-    dataFinal.setDate(dataFinal.getDate() + semanasNecessarias * 7);
-
-    const dataFinalFormatada = dataFinal.toISOString().split('T')[0];
-    
-    dataFinalInput.value = dataFinalFormatada;
-};
 </script>
