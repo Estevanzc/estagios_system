@@ -12,7 +12,7 @@ final class DocumentoController extends Controller {
         $data = $model->selectAll(new DocumentoVO());
 
         $this->loadView("listaDocumentos", [
-            "documento" => $data
+            "documentos" => $data
         ]);
     }
 
