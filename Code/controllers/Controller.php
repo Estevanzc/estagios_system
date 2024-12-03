@@ -8,7 +8,7 @@ abstract class Controller {
             session_start();
             session_regenerate_id();
         }
-        if ($obriga_login && !isset($_SESSION["usuario"])) {
+        if ($obriga_login && !isset($_SESSION["usuario"]) && $obriga_login > 0 && $obriga_login < 4) {
             $this->redirect("login.php");
             exit();
         }
