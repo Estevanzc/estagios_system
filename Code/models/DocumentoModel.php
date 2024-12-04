@@ -3,7 +3,6 @@
 namespace Model;
 
 use Model\VO\DocumentoVO;
-use Controller\DocumentoController;
 
 final class DocumentoModel extends Model
 {

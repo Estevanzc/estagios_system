@@ -3,7 +3,6 @@
 namespace Model;
 
 use Model\VO\ContratoVO;
-use Controller\ContratoController;
 
 final class ContratoModel extends Model
 {

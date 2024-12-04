@@ -3,7 +3,6 @@
 namespace Model;
 
 use Model\VO\CursoVO;
-use Controller\CursoController;
 
 final class CursoModel extends Model
 {
@@ -64,7 +63,6 @@ final class CursoModel extends Model
         $db = new Connection();
         $query = "DELETE FROM cursos WHERE id = :id";
         $binds = ["id" => $vo->getId()];
-        (new CursoController())->deleteFile($vo->getFoto());
 
         return $db->execute($query, $binds);
     }

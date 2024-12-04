@@ -3,7 +3,6 @@
 namespace Model;
 
 use Model\VO\BancaVO;
-use Controller\BancaController;
 
 final class BancaModel extends Model
 {
