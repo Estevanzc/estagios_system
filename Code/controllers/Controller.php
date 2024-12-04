@@ -11,13 +11,13 @@ abstract class Controller {
         if ($obriga_login && !isset($_SESSION["usuario"]) && $obriga_login > 0 && $obriga_login < 4) {
             $this->redirect("login.php");
             exit();
-        }
+        }/*
         if ($restricted) {
             if ($_SESSION["usuario"]->getNivel() < 4) {
                 $this->redirect("index.php");
                 exit();
             }
-        }
+        }*/
     }
     public function uploadFile($file, $old_file = "") {
         $this->deleteFile($old_file);
@@ -42,7 +42,10 @@ abstract class Controller {
     }
 
     public function loadView($view, $data = []) {
-        extract($data);
+        extract($data);/*
+        echo("<pre>");
+        print_r($estudante);
+        die;*/
         include("views/" . $view . ".php");
     }
 

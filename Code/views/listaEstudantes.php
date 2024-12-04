@@ -1,4 +1,4 @@
 <?php
 echo("<pre>");
-print_r($professores);
+print_r($estudantes);
 ?>
