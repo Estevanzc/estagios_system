@@ -7,11 +7,13 @@ use Model\EstudanteModel;
 use Model\ProfessorModel;
 use Model\DocumentoModel;
 use Model\BancaModel;
+use Model\CursoModel;
 use Model\EmpresaModel;
 use Model\VO\EstudanteVO;
 use Model\VO\ProfessorVO;
 use Model\VO\EmpresaVO;
 use Model\VO\ContratoVO;
+use Model\VO\CursoVO;
 
 final class ContratoController extends Controller {
 
@@ -22,11 +24,13 @@ final class ContratoController extends Controller {
         $estudante = (new EstudanteModel())->selectAll(new EstudanteVO());
         $empresa = (new EmpresaModel())->selectAll(new EmpresaVO());
         $professor = (new ProfessorModel())->selectAll(new ProfessorVO());
+        $curso = (new CursoModel())->selectAll(new CursoVO());
         $this->loadView("listaContratos", [
             "contratos" => $data,
             "estudante" => $estudante,
             "professor" => $professor,
-            "empresa" => $empresa
+            "empresa" => $empresa,
+            "curso" => $curso
         ]);
     }
     public function listOne($id_contrato) {

@@ -3,7 +3,6 @@
 namespace Model;
 
 use Model\VO\UsuarioVO;
-use Controller\UsuarioController;
 
 final class UsuarioModel extends Model {
 
