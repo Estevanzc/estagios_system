@@ -64,8 +64,8 @@
                     }
                 }
                 foreach ($contratos as $contrato) {
-                    $contrato_allow = true;
                     if ($_SESSION["usuario"]->getNivel() == 4) {
+                        $contrato_allow = true;
                         $est = getEstudante($contrato->getId_estudante(), $estudantes);
                         $cur = getCurso($est->getId_curso(), $cursos);
                         $emp = getEmpresa($contrato->getId_empresa(), $empresas);
@@ -75,12 +75,12 @@
                         //echo(isset($_GET["ano"]) && $contrato->getData_inicio() != $_GET["ano"]);
                         //echo(isset($_GET["curso"]) && $cur->getNome() != urldecode($_GET["curso"]));
                         //echo($cur->getNome() == urldecode($_GET["curso"]) ? "2": "");
+                        //echo($contrato_allow ? 1 : 2);
                         if (isset($_GET["curso"]) && $cur->getNome() != urldecode($_GET["curso"])) {
                             //echo(1);
                             $contrato_allow = false;
                         }
-                        if (isset($_GET["ano"]) && $contrato->getData_inicio() != $_GET["ano"]) {
-                            //echo(2);
+                        if (isset($_GET["ano"]) && substr($contrato->getData_inicio(), 0, 4) != $_GET["ano"]) {
                             $contrato_allow = false;
                         }
                         if (isset($_GET["estudante"]) && $est->getNome() != urldecode($_GET["estudante"])) {
@@ -99,6 +99,7 @@
                             //echo(6);
                             $contrato_allow = false;
                         }
+                        //echo($contrato_allow ? 1 : 2);
                         if ($contrato_allow) {
                             ?>
                                 <tr>
@@ -167,7 +168,7 @@
                         <?php
                         $counter = 1;
                         foreach ($cursos as $curso) {?>
-                        <option value="<?php echo($counter);?>"><?php echo($curso->getNome());?></option>
+                        <option value="<?php echo($counter);?>" <?php echo(isset($_GET["curso"]) && urldecode($_GET["curso"]) == $curso->getNome() ? "selected" : "");?>><?php echo($curso->getNome());?></option>
                         <?php
                         $counter ++;
                         }
@@ -189,7 +190,7 @@
                         }
                         foreach ($ano_list as $ano) {
                             ?>
-                            <option value="<?php echo($counter);?>"><?php echo($ano);?></option>
+                            <option value="<?php echo($counter);?>" <?php echo(isset($_GET["ano"]) && urldecode($_GET["ano"]) == $ano ? "selected" : "");?>><?php echo($ano);?></option>
                             <?php
                             $counter ++;
                         }
@@ -203,7 +204,7 @@
                         <?php
                         $counter = 1;
                         foreach ($estudantes as $estudante) {?>
-                        <option value="<?php echo($counter);?>"><?php echo($estudante->getNome());?></option>
+                        <option value="<?php echo($counter);?>" <?php echo(isset($_GET["estudante"]) && urldecode($_GET["estudante"]) == $estudante->getNome() ? "selected" : "");?>><?php echo($estudante->getNome());?></option>
                         <?php
                         $counter ++;
                         }
@@ -217,7 +218,7 @@
                         <?php
                         $counter = 1;
                         foreach ($professores as $professor) {?>
-                        <option value="<?php echo($counter);?>"><?php echo($professor->getNome());?></option>
+                        <option value="<?php echo($counter);?>" <?php echo(isset($_GET["professor"]) && urldecode($_GET["professor"]) == $professor->getNome() ? "selected" : "");?>><?php echo($professor->getNome());?></option>
                         <?php
                         $counter ++;
                         }
@@ -231,7 +232,7 @@
                         <?php
                         $counter = 1;
                         foreach ($empresas as $empresa) {?>
-                        <option value="<?php echo($counter);?>"><?php echo($empresa->getNome());?></option>
+                        <option value="<?php echo($counter);?>" <?php echo(isset($_GET["empresa"]) && urldecode($_GET["empresa"]) == $empresa->getNome() ? "selected" : "");?>><?php echo($empresa->getNome());?></option>
                         <?php
                         $counter ++;
                         }
@@ -239,11 +240,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="cidade">Nome Cidade</label>
-                    <input type="text" class="filter_param" onchange="filter_update(this)" id="cidade" name="cidade">
-                </div>
-                <div>
-                    <input type="checkbox" class="filter_param" onchange="filter_update(this)" name="contrato" id="contrato">
+                    <input type="checkbox" class="filter_param" onchange="filter_update(this)" name="contrato" id="contrato" <?php echo(isset($_GET["contrato"]) ? "checked" : "");?>>
                     <label for="contrato">Contratos próximos de acabar</label>
                 </div>
             </div>
