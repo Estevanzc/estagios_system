@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `contratos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contratos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `processo` enum('Impresso','Físico','Digital') DEFAULT (2),
+  `processo` enum('Impresso','Físico','Digital') not null,
   `encaminhamento` enum('Documentos Faltantes','Documentos Confirmados') NOT NULL,
   `area` varchar(255) NOT NULL,
   `data_inicio` date NOT NULL,
