@@ -41,7 +41,7 @@ CREATE TABLE `bancas` (
 
 LOCK TABLES `bancas` WRITE;
 /*!40000 ALTER TABLE `bancas` DISABLE KEYS */;
-INSERT INTO `bancas` VALUES (6,'Banca A','bancaA@example.com',11),(7,'Banca B','bancaB@example.com',12),(8,'Banca C','bancaC@example.com',13),(9,'Banca D','bancaD@example.com',14),(10,'Banca E','bancaE@example.com',15);
+INSERT INTO `bancas` VALUES (6,'Banca A','bancaA@example.com',11),(7,'Banca B','bancaB@example.com',12),(8,'Banca C','bancaC@example.com',13),(9,'Banca D','bancaD@example.com',14);
 /*!40000 ALTER TABLE `bancas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -54,7 +54,7 @@ DROP TABLE IF EXISTS `contratos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `contratos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `processo` enum('Impresso','Físico','Digital') NOT NULL,
+  `processo` enum('Impresso','Físico','Digital') DEFAULT (2),
   `encaminhamento` enum('Documentos Faltantes','Documentos Confirmados') NOT NULL,
   `area` varchar(255) NOT NULL,
   `data_inicio` date NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE `contratos` (
 
 LOCK TABLES `contratos` WRITE;
 /*!40000 ALTER TABLE `contratos` DISABLE KEYS */;
-INSERT INTO `contratos` VALUES (11,'Impresso','Documentos Confirmados','Administração','2023-01-01','2023-12-31',85,'Supervisor A','Gerente','123456789','supervisorA@example.com',NULL,0,1,6,1),(12,'Físico','Documentos Faltantes','Engenharia','2023-02-01','2023-11-30',90,'Supervisor B','Coordenador','987654321','supervisorB@example.com',NULL,0,2,7,2),(13,'Digital','Documentos Confirmados','Saúde','2023-03-01','2023-10-31',75,'Supervisor C','Gerente','456789123','supervisorC@example.com',NULL,0,3,8,3),(14,'Impresso','Documentos Faltantes','Educação','2023-04-01','2023-09-30',80,'Supervisor D','Coordenador','321654987','supervisorD@example.com',NULL,0,4,9,4),(15,'Físico','Documentos Confirmados','Tecnologia','2023-05-01','2023-08-31',95,'Supervisor E','Gerente','654321789','supervisorE@example.com',NULL,0,5,10,5);
+INSERT INTO `contratos` VALUES (11,'Impresso','Documentos Confirmados','Administração','2023-01-01','2023-12-31',85,'Supervisor A','Gerente','123456789','supervisorA@example.com',NULL,0,1,6,1),(12,'Físico','Documentos Faltantes','Engenharia','2023-02-01','2023-11-30',90,'Supervisor B','Coordenador','987654321','supervisorB@example.com',NULL,0,2,7,2),(13,'Digital','Documentos Confirmados','Saúde','2023-03-01','2023-10-31',75,'Supervisor C','Gerente','456789123','supervisorC@example.com',NULL,0,3,8,3),(14,'Impresso','Documentos Faltantes','Educação','2023-04-01','2023-09-30',80,'Supervisor D','Coordenador','321654987','supervisorD@example.com',NULL,0,4,9,4);
 /*!40000 ALTER TABLE `contratos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -100,7 +100,8 @@ CREATE TABLE `cursos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `carga_horaria` int NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nome` (`nome`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -123,13 +124,13 @@ DROP TABLE IF EXISTS `documentos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `documentos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tipo` enum('Termo de Compromisso','Plano de Atividades de Estágio','Ficha de Autoavaliação','Ficha de Avaliação da Empresa','Relatório final') DEFAULT NULL,
+  `tipo` enum('Termo de Compromisso','Plano de Atividades de Estágio','Ficha de Autoavaliação','Ficha de Avaliação da Empresa','Relatório final') NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `contrato_id` int NOT NULL,
+  `id_contrato` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `contrato_id` (`contrato_id`),
-  CONSTRAINT `documentos_ibfk_1` FOREIGN KEY (`contrato_id`) REFERENCES `contratos` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  KEY `contrato_id` (`id_contrato`),
+  CONSTRAINT `documentos_ibfk_1` FOREIGN KEY (`id_contrato`) REFERENCES `contratos` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -138,6 +139,7 @@ CREATE TABLE `documentos` (
 
 LOCK TABLES `documentos` WRITE;
 /*!40000 ALTER TABLE `documentos` DISABLE KEYS */;
+INSERT INTO `documentos` VALUES (9,'Termo de Compromisso','um',11),(10,'Plano de Atividades de Estágio','um',11),(11,'Ficha de Autoavaliação','um',11),(12,'Ficha de Avaliação da Empresa','um',11);
 /*!40000 ALTER TABLE `documentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,7 +181,7 @@ CREATE TABLE `empresas` (
 
 LOCK TABLES `empresas` WRITE;
 /*!40000 ALTER TABLE `empresas` DISABLE KEYS */;
-INSERT INTO `empresas` VALUES (1,'Empresa A','Empresa A LTDA','empresaA@example.com','12345678000195','Representante A','Diretor','12345678901','123456789','Cidade A','Endereço A','123456789','Convênio A',NULL),(2,'Empresa B','Empresa B LTDA','empresaB@example.com','12345678000196','Representante B','Gerente','12345678902','123456790','Cidade B','Endereço B','987654321','Convênio B',NULL),(3,'Empresa C','Empresa C LTDA','empresaC@example.com','12345678000197','Representante C','Coordenador','12345678903','123456791','Cidade C','Endereço C','456789123','Convênio C',NULL),(4,'Empresa D','Empresa D LTDA','empresaD@example.com','12345678000198','Representante D','Diretor','12345678904','123456792','Cidade D','Endereço D','321654987','Convênio D',NULL),(5,'Empresa E','Empresa E LTDA','empresaE@example.com','12345678000199','Representante E','Gerente','12345678905','123456793','Cidade E','Endereço E','654321789','Convênio E',NULL);
+INSERT INTO `empresas` VALUES (1,'HOS','HOS sistemas LTDA.','hossistemas@gmail.com','12345678912','Representante A','Diretor','12345678901','123456789','Cidade A','Endereço A','123456789','Convênio A',NULL),(2,'Empresa B','Empresa B LTDA','empresaB@example.com','12345678000196','Representante B','Gerente','12345678902','123456790','Cidade B','Endereço B','987654321','Convênio B',NULL),(3,'Empresa C','Empresa C LTDA','empresaC@example.com','12345678000197','Representante C','Coordenador','12345678903','123456791','Cidade C','Endereço C','456789123','Convênio C',NULL),(4,'Empresa D','Empresa D LTDA','empresaD@example.com','12345678000198','Representante D','Diretor','12345678904','123456792','Cidade D','Endereço D','321654987','Convênio D',NULL),(5,'Empresa E','Empresa E LTDA','empresaE@example.com','12345678000199','Representante E','Gerente','12345678905','123456793','Cidade E','Endereço E','654321789','Convênio E',NULL);
 /*!40000 ALTER TABLE `empresas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,7 +226,7 @@ CREATE TABLE `estudantes` (
 
 LOCK TABLES `estudantes` WRITE;
 /*!40000 ALTER TABLE `estudantes` DISABLE KEYS */;
-INSERT INTO `estudantes` VALUES (6,'Estudante A','estudanteA@example.com','20230001',1,1,'12345678901','123456789','2000-01-01','Responsável A','resA@example.com','Cidade A','Endereço A','123456789',1,NULL),(7,'Estudante B','estudanteB@example.com','20230002',1,2,'12345678902','123456790','2000-02-01','Responsável B','resB@example.com','Cidade B','Endereço B','987654321',2,NULL),(8,'Estudante C','estudanteC@example.com','20230003',1,3,'12345678903','123456791','2000-03-01','Responsável C','resC@example.com','Cidade C','Endereço C','456789123',3,NULL),(9,'Estudante D','estudanteD@example.com','20230004',1,4,'12345678904','123456792','2000-04-01','Responsável D','resD@example.com','Cidade D','Endereço D','321654987',4,NULL),(10,'Estudante E','estudanteE@example.com','20230005',1,5,'12345678905','123456793','2000-05-01','Responsável E','resE@example.com','Cidade E','Endereço E','654321789',5,NULL);
+INSERT INTO `estudantes` VALUES (6,'estevan','estevan.zimermann@gmail.com','20230001',1,1,'12345678912','123456789','2000-01-01','Responsável A','resA@example.com','Cidade A','Endereço A','123456789',1,NULL),(7,'Estudante B','estudanteB@example.com','20230002',0,2,'12345678902','123456790','2000-02-01','Responsável B','resB@example.com','Cidade B','Endereço B','987654321',2,NULL),(8,'Estudante C','estudanteC@example.com','20230003',1,3,'12345678903','123456791','2000-03-01','Responsável C','resC@example.com','Cidade C','Endereço C','456789123',3,NULL),(9,'Estudante D','estudanteD@example.com','20230004',1,4,'12345678904','123456792','2000-04-01','Responsável D','resD@example.com','Cidade D','Endereço D','321654987',4,NULL),(10,'Estudante E','estudanteE@example.com','20230005',1,5,'12345678905','123456793','2000-05-01','Responsável E','resE@example.com','Cidade E','Endereço E','654321789',5,NULL);
 /*!40000 ALTER TABLE `estudantes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +265,7 @@ CREATE TABLE `professores` (
 
 LOCK TABLES `professores` WRITE;
 /*!40000 ALTER TABLE `professores` DISABLE KEYS */;
-INSERT INTO `professores` VALUES (1,'Professor A','professorA@example.com','12345678','12345678901','123456789','Cidade A','Endereço A','123456789','professor',NULL),(2,'Professor B','professorB@example.com','23456789','12345678902','123456790','Cidade B','Endereço B','987654321','coordenador',NULL),(3,'Professor C','professorC@example.com','34567890','12345678903','123456791','Cidade C','Endereço C','456789123','professor',NULL),(4,'Professor D','professorD@example.com','45678901','12345678904','123456792','Cidade D','Endereço D','321654987','coordenador',NULL),(5,'Professor E','professorE@example.com','56789012','12345678905','123456793','Cidade E','Endereço E','654321789','professor',NULL);
+INSERT INTO `professores` VALUES (1,'Luiz E','luizec2007@gmail.com','12345678','12345678912','123456789','Cidade A','Endereço A','123456789','professor',NULL),(2,'Professor B','professorB@example.com','23456789','12345678902','123456790','Cidade B','Endereço B','987654321','coordenador',NULL),(3,'Professor C','professorC@example.com','34567890','12345678903','123456791','Cidade C','Endereço C','456789123','professor',NULL),(4,'Professor D','professorD@example.com','45678901','12345678904','123456792','Cidade D','Endereço D','321654987','coordenador',NULL),(5,'Professor E','professorE@example.com','56789012','12345678905','123456793','Cidade E','Endereço E','654321789','professor',NULL);
 /*!40000 ALTER TABLE `professores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,13 +278,14 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `login` varchar(12) NOT NULL,
+  `login` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `nivel` int DEFAULT '1',
   `foto` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `login` (`login`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  UNIQUE KEY `login` (`login`),
+  UNIQUE KEY `login_2` (`login`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,6 +294,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'secaoestagio@gmail.com','21232f297a57a5a743894a0e4a801fc3',4,'logo.png'),(2,'estevan.zimermann@gmail.com','faf5341a39919352a4f9bde4d6de5396',1,'estevan.png'),(3,'luizec2007@gmail.com','faf5341a39919352a4f9bde4d6de5396',2,'luiz.png'),(4,'hossistemas@gmail.com','faf5341a39919352a4f9bde4d6de5396',3,'hos.png');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -303,4 +307,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-04  8:48:39
+-- Dump completed on 2024-12-11  8:27:11

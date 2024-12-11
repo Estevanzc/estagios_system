@@ -16,26 +16,20 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Contrato</th>
+                    <th>Carga Horária</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($bancas as $banca) {?> 
+                <?php foreach ($cursos as $curso) {?> 
                     <tr>
-                        <td><?php echo $banca->getId(); ?></td>
-                        <td><?php echo $banca->getNome(); ?></td>
-                        <td><?php echo $banca->getEmail(); ?></td>
-                        <td>
-                            <a href="uploads/<?php echo $banca->getId_contrato(); ?>">
-                                Visualizar contrato de <?php echo $banca->getNome(); ?>
-                            </a>
-                        </td>
+                        <td><?php echo $curso->getId(); ?></td>
+                        <td><?php echo $curso->getNome(); ?></td>
+                        <td><?php echo $curso->getCarga_horaria(); ?></td>
                     </tr>
-                <?php } if ($bancas == []) {?>
+                <?php } if ($cursos == []) {?>
                     <tr>
-                        <td colspan="4">
-                            Sem bancas cadastradas...
+                        <td colspan="3">
+                            Sem cursos cadastrados...
                         </td>
                     </tr>
                 <?php } ?>

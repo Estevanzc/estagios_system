@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.main-menu {
+    width: 100%;
+    height: 64px;
+}
+
+.main-menu .nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #F5F5F5;
+}
+
+.main-menu .nav-bar img {
+    width: 165px;
+    cursor: pointer;
+}
+
+.main-menu .nav-bar .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style-type: none;
+}
+
+.main-menu .nav-bar .nav-links li a {
+    text-decoration: none;
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    font-size: 20px;
+    font-weight: 600;
+    color: #363ABF;
+    transition: all .3s ease-in-out;
+}
+
+.main-menu .nav-bar .nav-links li a:hover {
+    letter-spacing: 1px;
+    font-weight: 800;
+    color: #5054CE;
+}
+
+.main-menu .nav-bar .profile-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: fit-content;
+    max-width: fit-content;
+    clip-path: circle(28px at center);
+}
+
+.main-menu .nav-bar .profile-div a {
+    width: 100%;
+    height: 100%;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+}
+
+.main-menu .nav-bar .profile-div a img {
+    max-width: 64px;
+}
+
+.main-menu .nav-bar .profile-div:hover a {
+    background-color: rgba(0,0,0,0.3);
+}
+
+.container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    background-color: #1F226F;
+    min-height: calc(100vh - 64px);
+    width: 100%;
+}
+
+.container.content {
+    flex-direction: column;
+}
+
+.nav-bar-phone {
+    display: none;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 64px;
+    padding: 30px 0;
+}
+
+.login-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 25px;
+    max-width: 50%;
+    height: 100%;
+    background-color: #F5F5F5;
+    padding: 20px;
+}
+
+.login-form .logo {
+    max-width: 200px;
+}
+
+.login-form h1, .login-form h4 {
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    font-weight: 700;
+    padding-bottom: 10px;
+}
+
+.login-form h1 {
+    font-size: 64px;
+    color: #5054CE;
+}
+
+.login-form h4 {
+    font-size: 24px;
+    font-family: 'Poppins', 'Poppins', 'Arial';
+    color: #0D1317;
+}
+
+.login-form input {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #0D1317;
+    border-radius: 10px;
+    background: transparent;
+    font-size: 24px;
+    color: #0D1317;
+}
+
+.login-form input::placeholder {
+    color: #0D1317;
+}
+
+.login-form button {
+    margin-top: auto;
+    min-width: 100%;
+    height: 64px;
+    border: none;
+    border-radius: 7px;
+    background-color: #5054CE;
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    font-size: 24px;
+    font-weight: 600;
+    color: #F5F5F5;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.login-form button:hover {
+    background-color: #363ABF;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+} 
+
+.login-form button:active {
+    background-color: #6064D2;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.bg-decoration {
+    width: 50%;
+    height: 100%;
+}
+
+.bg-decoration .decorative-circle, .bg-decoration .decorative-circle-small {
+    position: absolute;
+    content: '';
+    width: 300px;
+    height: 300px;
+}
+
+.bg-decoration .decorative-circle {
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(#363ABF, #DE1A1A);
+    clip-path: circle(300px at right bottom);
+}
+
+.bg-decoration .decorative-circle-small {
+    top: 0;
+    left: 50%;
+    background: linear-gradient(#FCE4D8, #363ABF);
+    clip-path: circle(200px at 30% top);
+}
+
+table {
+    align-self: center;
+    font-size: 16px;
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    width: 95%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    overflow-x: scroll;
+}
+
+table thead tr {
+    background-color: #363ABF;
+    font-size: 18px;
+    text-align: left;
+    color: #F5F5F5;
+}
+
+table th, td {padding: 10px;}
+
+table td {
+    background-color: #F5F5F5;
+}
+
+table tbody tr {
+    border-left: 1px solid #363ABF;
+    border-bottom: 1px solid #363ABF;
+}
+
+table tbody tr:last-of-type {
+    border-bottom: 4px solid #363ABF;
+}
+
+@media only screen and (max-width: 768px) {
+    .main-menu .nav-bar {
+        display: none;
+    }
+
+    .main-menu .nav-bar-phone {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        padding: 0 10px;
+        background-color: #F5F5F5;
+    }
+
+    .main-menu .nav-bar-phone .logo-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: fit-content;
+        max-height: fit-content;
+    }
+
+    .main-menu .nav-bar-phone .logo-div img {
+        max-width: 56px;
+    }
+
+    .main-menu .nav-bar-phone .hamburguer-menu {
+        display: block;
+        height: 56px;
+        width: 56px;
+        font-size: 56px;
+        color: #363ABF;
+    }
+
+    .main-menu .nav-bar-phone .nav-links {
+        position: absolute;
+        left: 0;
+        top: 64px;
+        display: block;
+        width: 70%;
+        height: calc(100% - 64px);
+        list-style-type: none;
+        background-color: #363ABF;
+        transform: translateX(-100%);
+        transition: all .5s ease-in-out;
+    }
+
+    .main-menu .nav-bar-phone .nav-links li {
+        padding: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .main-menu .nav-bar-phone .nav-links li:first-of-type {
+        min-height: 20%;
+        background-color: #F5F5F5;
+    }
+
+    .main-menu .nav-bar-phone .nav-links li:first-of-type img {
+        max-width: 64px;
+        border-radius: 50%;
+    }
+
+    .main-menu .nav-bar-phone .nav-links li:first-of-type h2 {
+        font-family: 'Montserrat', 'Poppins', 'Arial';
+        font-size: 24px;
+    }
+
+    .main-menu .nav-bar-phone .nav-links li a {
+        font-family: 'Montserrat', 'Poppins', 'Arial';
+        font-weight: 600;
+        text-decoration: none;
+        color: #F5F5F5;
+    }
+
+    .main-menu .nav-bar-phone .nav-links.active {
+        transform: translateX(0);
+    }
+
+    .login-form {
+        min-width: 100%;
+    }
+
+    .login-form h1 {
+        font-size: 32px;
+    }
+
+    .login-form h4 {
+        font-size: 18px;
+    }
+
+    .bg-decoration {
+        display: none;
+    }
+}

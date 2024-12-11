@@ -8,16 +8,17 @@ abstract class Controller {
             session_start();
             session_regenerate_id();
         }
-        if ($obriga_login && !isset($_SESSION["usuario"]) && $obriga_login > 0 && $obriga_login < 4) {
+        echo ("<script>console.log($obriga_login)</script>");
+        if ($obriga_login && !isset($_SESSION["usuario"])) {
             $this->redirect("login.php");
             exit();
-        }/*
+        }
         if ($restricted) {
             if ($_SESSION["usuario"]->getNivel() < 4) {
                 $this->redirect("index.php");
                 exit();
             }
-        }*/
+        }
     }
     public function uploadFile($file, $old_file = "") {
         $this->deleteFile($old_file);
