@@ -43,10 +43,10 @@ final class ContratoController extends Controller {
         $curso = (new CursoModel())->selectAll(new CursoVO());
         $this->loadView("listaContratos", [
             "contratos" => $data,
-            "estudante" => $estudante,
-            "professor" => $professor,
-            "empresa" => $empresa,
-            "curso" => $curso
+            "estudantes" => $estudante,
+            "professores" => $professor,
+            "empresas" => $empresa,
+            "cursos" => $curso
         ]);
     }
     public function listOne($id_contrato) {
