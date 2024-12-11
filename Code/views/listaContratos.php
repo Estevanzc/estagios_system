@@ -155,7 +155,7 @@
             </tbody>
         </table>
     </div>
-    <section id="second-screen"> <!--modal que abre na frente do usuário-->
+    <section id="second-screen" style="display: none;"> <!--modal que abre na frente do usuário-->
         <div>
             <div><button class="window-button" onclick="window_interact(this)"><i class="fa-solid fa-xmark"></i></button></div> <!--botão que fecha a modal de filtro-->
         </div>

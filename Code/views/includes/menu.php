@@ -31,8 +31,8 @@
 
             <ul id="nav-links" class="nav-links">
                 <li>
-                    <img src="uploads/White-Duck.png" alt="Sua imagem de perfil">
-                    <h2>White Duck Da Silva</h2>
+                    <img src="uploads/<?php echo($_SESSION["usuario"]->getFoto())?>" alt="Sua imagem de perfil">
+                    <h2><?php echo($_SESSION["usuario"]->getLogin())?></h2>
                 </li>
                 <li><a href="estudantes.php">Estudantes</a></li>
                 <li><a href="bancas.php">Bancas</a></li>
