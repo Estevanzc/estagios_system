@@ -22,6 +22,21 @@ final class ContratoModel extends Model
 
         return $arrayDados;
     }
+    public function selectAllById($vo, $id = null, $id_value = null)
+    {
+        $db = new Connection();
+        $query = "SELECT * FROM contratos". ($id == null ? "" : " WHERE $id = $id_value");
+        $data = $db->select($query);
+
+        $arrayDados = [];
+
+        foreach ($data as $row) {
+            $vo = new ContratoVO($row["id"], $row["processo"], $row["encaminhamento"], $row["area"], $row["data_inicio"], $row["data_fim"], $row["media_final"], $row["supervisor"], $row["s_cargo"], $row["s_telefone"], $row["s_email"], $row["observacao"], $row["encerramento"], $row["id_empresa"], $row["id_estudante"], $row["id_professor"]);
+            array_push($arrayDados, $vo);
+        }
+
+        return $arrayDados;
+    }
 
     public function selectOne($vo)
     {

@@ -11,15 +11,15 @@
                 <li><a href="documentos.php">Documentos</a></li>
                 <li><a href="empresas.php">Empresas</a></li>
                 <li><a href="professores.php">Bancas</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
 
             <div class="profile-div">
                 <a href="#">
-                    <img src="uploads/White-Duck.png" alt="Sua imagem de perfil">
+                    <img src="uploads/<?php echo($_SESSION["usuario"]->getFoto() ? $_SESSION["usuario"]->getFoto() : "White-Duck.png");?>" alt="Sua imagem de perfil">
                 </a>
             </div>
         </nav>
-
         <nav class="nav-bar-phone">
             <div class="logo-div">
                 <img src="uploads/logo-no-txt.png" alt="">

@@ -30,6 +30,14 @@ final class EstudanteModel extends Model {
 
         return new EstudanteVO($data[0]["id"], $data[0]["nome"], $data[0]["email"], $data[0]["matricula"], $data[0]["matricula_ativa"],  $data[0]["ano_curso"], $data[0]["cpf"], $data[0]["rg"], $data[0]["data_nasc"], $data[0]["res_nome"], $data[0]["res_email"], $data[0]["cidade"],$data[0]["endereco"],$data[0]["telefone"], $data[0]["id_curso"], $data[0]["foto"]);
     }
+    public function selectIdByEmail($email) {
+        $db = new Connection();
+        $query = "SELECT estudantes.id FROM estudantes WHERE email = :email";
+        $binds = ["email" => $email];
+        $data = $db->select($query, $binds);
+
+        return $data[0]["id"];
+    }
 
     public function insert($vo) {
         $db = new Connection();

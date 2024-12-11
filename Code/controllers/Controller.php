@@ -8,7 +8,7 @@ abstract class Controller {
             session_start();
             session_regenerate_id();
         }
-        echo ("<script>console.log($obriga_login)</script>");
+        //echo ("<script>console.log($obriga_login)</script>");
         if ($obriga_login && !isset($_SESSION["usuario"])) {
             $this->redirect("login.php");
             exit();
