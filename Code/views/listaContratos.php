@@ -11,6 +11,7 @@
     <?php require("includes/menu.php") ?>
 
     <div class="container content">
+        <button class="window-button" onclick="window_interact(this)">Filtros</button> <!--botão que abre a modal de filtro-->
         <table>
             <thead>
                 <tr>
@@ -62,11 +63,86 @@
             </tbody>
         </table>
     </div>
-    
+    <section id="second-screen"> <!--modal que abre na frente do usuário-->
+        <div>
+            <div><button class="window-button" onclick="window_interact(this)"><i class="fa-solid fa-xmark"></i></button></div> <!--botão que fecha a modal de filtro-->
+        </div>
+        <div>
+            <div id="filters-list">
+                <div>
+                    <label for="curso">Curso</label>
+                    <select class="filter_param" onchange="filter_update(this)" name="curso" id="curso">
+                        <option value="-1">Não selecionado</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="ano">Ano de Início</label>
+                    <select class="filter_param" onchange="filter_update(this)" name="ano" id="ano">
+                        <option value="-1">Não selecionado</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="estudante">Nome Estudante</label>
+                    <select class="filter_param" onchange="filter_update(this)" name="estudante" id="estudante">
+                        <option value="-1">Não selecionado</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="professor">Nome Professor</label>
+                    <select class="filter_param" onchange="filter_update(this)" name="professor" id="professor">
+                        <option value="-1">Não selecionado</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="empresa">Nome Empresa</label>
+                    <select class="filter_param" onchange="filter_update(this)" name="empresa" id="empresa">
+                        <option value="-1">Não selecionado</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="cidade">Nome Cidade</label>
+                    <input type="text" class="filter_param" onchange="filter_update(this)" id="cidade" name="cidade">
+                </div>
+                <div>
+                    <input type="checkbox" class="filter_param" onchange="filter_update(this)" name="contrato" id="contrato">
+                    <label for="contrato">Contratos próximos de acabar</label>
+                </div>
+            </div>
+            <a id="filter-apply" href="index.php?">Apply</a>
+        </div>
+    </section>
     
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="script.js"></script>
+    <script>
+        var filter_param = document.getElementsByClassName("filter_param")
+        var filter_apply = document.getElementById("filter-apply")
+        var window_setter = false
+        function window_interact(element) {
+            if (window_setter) {
+                //css para fechar a modal
+                window_setter = false
+            } else {
+                //css para abrir a modal
+                window_setter = true
+            }
+        }
+        function filter_update(element) {
+            var link = "index.php?"
+            for (var i = 0; i <= filter_param.length-1; i ++) {
+                if (filter_param[i].tagName == "SELECT" && Number(filter_param[i].value) != -1 || filter_param[i].type == "text" && filter_param[i].value != "") {
+                    link += (link != "index.php?" ? "&" : "") + `${filter_param[i].id}=${encodeURIComponent(filter_param[i].value)}`
+                } else if (filter_param[i].type == "checkbox" && filter_param[i].checked == true) {
+                    //console.log(`${filter_param[i].id}=${filter_param[i].checked}`);
+                    link += (link != "index.php?" ? "&" : "") + `${filter_param[i].id}=1`
+                    //console.log(1);
+                    
+                }
+            }
+            //console.log(link);
+        }
+    </script>
 </body>
 </html>
