@@ -30,16 +30,16 @@
 
             <ul id="nav-links" class="nav-links">
                 <li>
-                    <img src="uploads/<?php echo($_SESSION["usuario"]->getFoto())?>" alt="Sua imagem de perfil">
+                    <img style="max-width: 100px;" src="uploads/<?php echo($_SESSION["usuario"]->getFoto())?>" alt="Sua imagem de perfil">
                     <h2><?php echo($_SESSION["usuario"]->getLogin())?></h2>
                 </li>
                 <li><a href="estudantes.php">Estudantes</a></li>
+                <li><a href="professores.php">Professores</a></li>
+                <li><a href="empresas.php">Empresas</a></li>
                 <li><a href="bancas.php">Bancas</a></li>
                 <li><a href="contratos.php">Contratos</a></li>
                 <li><a href="cursos.php">Cursos</a></li>
                 <li><a href="documentos.php">Documentos</a></li>
-                <li><a href="empresas.php">Empresas</a></li>
-                <li><a href="professores.php">Professores</a></li>
             </ul>
         </nav>
     </header>

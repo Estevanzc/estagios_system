@@ -7,6 +7,126 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="uploads/logo-no-txt.png">
+    <style>
+        #second-screen {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+            font-family: monospace;
+            backdrop-filter: blur(5px);
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            background-color: rgba(255,255,255,0.8);
+            z-index: 1;
+        }
+        #second-screen>*:nth-child(1) {
+            width: 100%;
+            height: 15%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        #second-screen>*:nth-child(1)>* {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(80,85,203);
+            border: none;
+            cursor: pointer;
+            font-size: 12pt;
+            border-radius: 100%;
+            margin-right: 10px;
+            transition: all 0.25s ease;
+            color: white;
+        }
+        #second-screen>*:nth-child(1)>*:hover {
+            box-shadow: 1px 1px 5px black;
+            background-color: red;
+        }
+        #second-screen>*:nth-child(2) {
+            width: 100%;
+            height: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+            gap: 20px 0px;
+        }
+        #filters-list {
+            width: 100%;
+            height: 80%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-flow: column wrap;
+            gap: 20px 0px;
+        }
+        #filters-list select {
+            width: 85%;
+            height: 30px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+            background-color: rgba(255,255,255,0.8);
+            padding: 0px 10px;
+            cursor: pointer;
+        }
+        #filters-list label {
+            cursor: pointer;
+            font-size: 11pt;
+        }
+        #filters-list>* {
+            width: 50%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-flow: column;
+            margin-left: 15px;
+            font-weight: bold;
+            gap: 5px 10px;
+        }
+        #filters-list>*:nth-child(6) {
+            flex-flow: row;
+        }
+        #filter-apply {
+            padding: 5px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border-radius: 2.5px;
+            background-color: rgb(80,85,203);
+            color: white;
+        }
+        #filter-apply:hover {
+            box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+        .window-button:nth-child(1) {
+            width: 80px;
+            height: 30px;
+            font-weight: bold;
+            margin-right: 50px;
+            align-self: flex-end;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: rgb(80,85,203);
+        }
+        .container.content {
+            gap: 10px 0px;
+        }
+    </style>
 </head>
 <body>
     
@@ -183,7 +303,7 @@
     </div>
     <section id="second-screen"> <!--modal que abre na frente do usuário-->
         <div>
-            <div><button class="window-button" onclick="window_interact(this)"><i class="fa-solid fa-xmark"></i></button></div> <!--botão que fecha a modal de filtro-->
+            <button class="window-button" onclick="window_interact(this)"><i class="fa-solid fa-xmark"></i></button> <!--botão que fecha a modal de filtro-->
         </div>
         <div>
             <div id="filters-list">
@@ -281,13 +401,14 @@
     <script>
         var filter_param = document.getElementsByClassName("filter_param")
         var filter_apply = document.getElementById("filter-apply")
+        var second_screen = document.getElementById("second-screen")
         var window_setter = false
         function window_interact(element) {
             if (window_setter) {
-                //css para fechar a modal
+                second_screen.style.display = "none"
                 window_setter = false
             } else {
-                //css para abrir a modal
+                second_screen.style.display = "flex"
                 window_setter = true
             }
         }
