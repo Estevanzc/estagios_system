@@ -251,6 +251,65 @@ table tbody tr:last-of-type {
     border-bottom: 4px solid #363ABF;
 }
 
+.form-add {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    gap: 10px;
+    width: 80%;
+    min-height: 50%;
+    padding: 30px;
+    background-color: #f5f5f5;
+    border-radius: 25px;
+}
+
+.form-add h2 {
+    align-self: flex-start;
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    font-weight: 800;
+    color: #363ABF;
+}
+
+.form-add input {
+    width: 100%;
+    height: 56px;
+    padding: 7px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #363ABF;
+}
+
+.form-add input[type=file] {
+    display: none;
+}
+
+.form-add .file-input {
+    align-self: flex-start;
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    font-weight: 600;
+    color: #F5F5F5;
+    background-color: #363ABF;
+    padding: 10px;
+}
+
+.form-add input::placeholder {
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    color: #363ABF;
+}
+
+.form-add button {
+    min-width: 15%;
+    font-family: 'Montserrat', 'Poppins', 'Arial';
+    font-weight: 600;
+    color: #f5f5f5;
+    background-color: #363ABF;
+    padding: 15px;
+    border: none;
+    border-radius: 7px;
+}
+
 @media only screen and (max-width: 768px) {
     .main-menu .nav-bar {
         display: none;
