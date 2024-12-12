@@ -59,6 +59,7 @@ final class ContratoController extends Controller {
         $estudante = (new EstudanteModel())->selectAll(new EstudanteVO());
         $empresa = (new EmpresaModel())->selectAll(new EmpresaVO());
         $professor = (new ProfessorModel())->selectAll(new ProfessorVO());
+        $cursos = (new CursoModel())->selectAll(new CursoVO());
         $bancas = (new BancaModel())->selectBycontrato($data->getId());
         $documentos = (new DocumentoModel())->selectBycontrato($data->getId());
         $this->loadView("infoContrato", [
@@ -67,6 +68,7 @@ final class ContratoController extends Controller {
             "professores" => $professor,
             "empresas" => $empresa,
             "bancas" => $bancas,
+            "cursos" => $cursos,
             "documentos" => $documentos
         ]);
     }
@@ -81,14 +83,14 @@ final class ContratoController extends Controller {
         } else {
             $contrato = new ContratoVO();
         }
-        $estudante = (new EstudanteModel())->selectOne(new EstudanteVO($contrato->getId_estudante()));
-        $empresa = (new EmpresaModel())->selectOne(new EmpresaVO($contrato->getId_empresa()));
-        $professor = (new ProfessorModel())->selectOne(new ProfessorVO($contrato->getId_professor()));
+        $estudante = (new EstudanteModel())->selectAll(new EstudanteVO());
+        $empresa = (new EmpresaModel())->selectAll(new EmpresaVO());
+        $professor = (new ProfessorModel())->selectAll(new ProfessorVO());
         $this->loadView("formContrato", [
             "contrato" => $contrato,
-            "estudante" => $estudante,
-            "professor" => $professor,
-            "empresa" => $empresa
+            "estudantes" => $estudante,
+            "professores" => $professor,
+            "empresas" => $empresa
         ]);
     }
 

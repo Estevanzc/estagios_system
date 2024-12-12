@@ -36,7 +36,7 @@
 
     <div class="container content">
         <a href="professores.php" id="insert_button">Inserir Professores</a>
-        <div class="table-container">
+        <div class="table-container table-professores">
             <table>
                 <thead>
                     <tr>

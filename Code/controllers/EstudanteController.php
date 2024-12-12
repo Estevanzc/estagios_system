@@ -37,10 +37,10 @@ final class EstudanteController extends Controller {
             $estudante = new EstudanteVO();
         }
 
-        $curso = (new CursoModel())->selectOne(new CursoVO($estudante->getId_curso()));
+        $curso = (new CursoModel())->selectAll(new CursoVO());
         $this->loadView("formEstudante", [
             "estudante" => $estudante,
-            "curso" => $curso,
+            "cursos" => $curso,
         ]);
     }
 

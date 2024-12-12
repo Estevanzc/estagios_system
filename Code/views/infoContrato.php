@@ -142,7 +142,7 @@
                             <td><?php echo $est->getCidade(); ?></td>
                             <td><?php echo $est->getEndereco(); ?></td>
                             <td><?php echo $est->getTelefone(); ?></td>
-                            <td><?php echo $est->getId_curso(); ?></td>
+                            <td><?php echo(getCurso($est->getId_curso(), $cursos)->getNome()); ?></td>
                         </tr>
                     <?php
                     ?>
