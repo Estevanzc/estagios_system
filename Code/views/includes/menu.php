@@ -1,16 +1,15 @@
 
     <header class="main-menu">
         <nav class="nav-bar">
-            <img src="uploads/logo.png" alt="">
+            <img src="uploads/logo.png" onclick="home_redirect()" alt="">
 
             <ul class="nav-links">
                 <li><a href="estudantes.php">Estudantes</a></li>
+                <li><a href="professores.php">Professores</a></li>
+                <li><a href="empresas.php">Empresas</a></li>
                 <li><a href="bancas.php">Bancas</a></li>
-                <li><a href="contratos.php">Contratos</a></li>
                 <li><a href="cursos.php">Cursos</a></li>
                 <li><a href="documentos.php">Documentos</a></li>
-                <li><a href="empresas.php">Empresas</a></li>
-                <li><a href="professores.php">Bancas</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
 

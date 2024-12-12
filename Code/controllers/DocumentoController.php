@@ -43,7 +43,7 @@ final class DocumentoController extends Controller {
             $result = $model->update($vo);
         }
 
-        $this->redirect("contratos.php");
+        $this->redirect("documentos.php");
     }
 
     public function remove() {
@@ -53,7 +53,7 @@ final class DocumentoController extends Controller {
 
         $result = $model->delete($vo);
 
-        $this->redirect("contratos.php");
+        $this->redirect("documentos.php");
     }
 
 }

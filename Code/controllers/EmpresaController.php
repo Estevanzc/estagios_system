@@ -4,8 +4,10 @@ namespace Controller;
 
 use Model\EmpresaModel;
 use Model\UsuarioModel;
+use Model\ContratoModel;
 use Model\VO\EmpresaVO;
 use Model\VO\UsuarioVO;
+use Model\VO\ContratoVO;
 
 final class EmpresaController extends Controller {
 
@@ -13,6 +15,7 @@ final class EmpresaController extends Controller {
         $model = new EmpresaModel();
         $data = $model->selectAll(new EmpresaVO());
 
+        $contrato = (new ContratoModel())->selectAll(new ContratoVO());
         $this->loadView("listaEmpresas", [
             "empresas" => $data
         ]);

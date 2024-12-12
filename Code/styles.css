@@ -206,11 +206,17 @@ body {
     clip-path: circle(200px at 30% top);
 }
 
-table {
+.table-container {
+    display: block;
     align-self: center;
+    width: 95%;
+    overflow-x: auto;
+}
+
+table {
     font-size: 16px;
     font-family: 'Montserrat', 'Poppins', 'Arial';
-    width: 95%;
+    width: 100%;
     box-shadow: 0 0 15px rgba(0,0,0,0.3);
     overflow-x: scroll;
 }
@@ -224,8 +230,16 @@ table thead tr {
 
 table th, td {padding: 10px;}
 
+table th {
+    white-space: nowrap;
+}
+
 table td {
     background-color: #F5F5F5;
+}
+
+table td img {
+    max-width: 100px;
 }
 
 table tbody tr {
@@ -294,14 +308,15 @@ table tbody tr:last-of-type {
         background-color: #F5F5F5;
     }
 
-    .main-menu .nav-bar-phone .nav-links li:first-of-type img {
+    .main-menu .nav-bar-phone .nav-links li:first-of-type a img {
         max-width: 64px;
         border-radius: 50%;
     }
 
-    .main-menu .nav-bar-phone .nav-links li:first-of-type h2 {
+    .main-menu .nav-bar-phone .nav-links li:first-of-type a h2 {
         font-family: 'Montserrat', 'Poppins', 'Arial';
         font-size: 24px;
+        color: #0D1317;
     }
 
     .main-menu .nav-bar-phone .nav-links li a {

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listagem de Contratos - Sistema de Estágios</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,97 +13,142 @@
 
     <div class="container content">
         <button class="window-button" onclick="window_interact(this)">Filtros</button> <!--botão que abre a modal de filtro-->
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Processo</th>
-                    <th>Encaminhamento</th>
-                    <th>Área</th>
-                    <th>Data de Início</th>
-                    <th>Data de Finalização</th>
-                    <th>Média Final</th>
-                    <th>Supervisor</th>
-                    <th>Cargo do Supervisor</th>
-                    <th>Telefone do Supervisor</th>
-                    <th>E-mail do Supervisor</th>
-                    <th>Observação</th>
-                    <th>Encerramento</th>
-                    <th>Empresa</th>
-                    <th>Estudante</th>
-                    <th>Professor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                function getEstudante($id, $estudantes) {
-                    foreach($estudantes as $estudante) {
-                        if ($estudante->getId() == $id) {
-                            return $estudante;
-                        }
-                    }
-                }
-                function getProfessor($id, $professores) {
-                    foreach($professores as $professor) {
-                        if ($professor->getId() == $id) {
-                            return $professor;
-                        }
-                    }
-                }
-                function getEmpresa($id, $empresas) {
-                    foreach($empresas as $empresa) {
-                        if ($empresa->getId() == $id) {
-                            return $empresa;
-                        }
-                    }
-                }
-                function getCurso($id, $cursos) {
-                    foreach($cursos as $curso) {
-                        if ($curso->getId() == $id) {
-                            return $curso;
-                        }
-                    }
-                }
-                foreach ($contratos as $contrato) {
-                    if ($_SESSION["usuario"]->getNivel() == 4) {
-                        $contrato_allow = true;
-                        $est = getEstudante($contrato->getId_estudante(), $estudantes);
-                        $cur = getCurso($est->getId_curso(), $cursos);
-                        $emp = getEmpresa($contrato->getId_empresa(), $empresas);
-                        $pro = getProfessor($contrato->getId_professor(), $professores);
-                        $initDate = new DateTime(date("Y-m-d"));
-                        $endDate = new DateTime($contrato->getData_fim());
-                        //echo(isset($_GET["ano"]) && $contrato->getData_inicio() != $_GET["ano"]);
-                        //echo(isset($_GET["curso"]) && $cur->getNome() != urldecode($_GET["curso"]));
-                        //echo($cur->getNome() == urldecode($_GET["curso"]) ? "2": "");
-                        //echo($contrato_allow ? 1 : 2);
-                        if (isset($_GET["curso"]) && $cur->getNome() != urldecode($_GET["curso"])) {
-                            //echo(1);
-                            $contrato_allow = false;
-                        }
-                        if (isset($_GET["ano"]) && substr($contrato->getData_inicio(), 0, 4) != $_GET["ano"]) {
-                            $contrato_allow = false;
-                        }
-                        if (isset($_GET["estudante"]) && $est->getNome() != urldecode($_GET["estudante"])) {
-                            //echo(3);
-                            $contrato_allow = false;
-                        }
-                        if (isset($_GET["professor"]) && $pro->getNome() != urldecode($_GET["professor"])) {
-                            //echo(4);
-                            $contrato_allow = false;
-                        }
-                        if (isset($_GET["empresa"]) && $emp->getNome() != urldecode($_GET["empresa"])) {
-                            //echo(5);
-                            $contrato_allow = false;
-                        }
-                        if (isset($_GET["contrato"]) && (int) $initDate->diff($endDate)->days > 14 && (int) substr($contrato->getData_fim(), 0, 4) >= (int) date("Y")) {
-                            //echo(6);
-                            $contrato_allow = false;
-                        }
-                        //echo($contrato_allow ? 1 : 2);
-                        if ($contrato_allow) {
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Processo</th>
+                        <th>Encaminhamento</th>
+                        <th>Área</th>
+                        <th>Data de Início</th>
+                        <th>Data de Finalização</th>
+                        <th>Média Final</th>
+                        <th>Supervisor</th>
+                        <th>Cargo do Supervisor</th>
+                        <th>Telefone do Supervisor</th>
+                        <th>E-mail do Supervisor</th>
+                        <th>Observação</th>
+                        <th>Encerramento</th>
+                        <th>Empresa</th>
+                        <th>Estudante</th>
+                        <th>Professor</th>
+                        <?php
+                        if ($_SESSION["usuario"]->getNivel() == 4) {
                             ?>
-                                <tr>
+                            <th colspan="2">Ações</th>
+                            <?php
+                        }
+                        ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    function getEstudante($id, $estudantes) {
+                        foreach($estudantes as $estudante) {
+                            if ($estudante->getId() == $id) {
+                                return $estudante;
+                            }
+                        }
+                    }
+                    function getProfessor($id, $professores) {
+                        foreach($professores as $professor) {
+                            if ($professor->getId() == $id) {
+                                return $professor;
+                            }
+                        }
+                    }
+                    function getEmpresa($id, $empresas) {
+                        foreach($empresas as $empresa) {
+                            if ($empresa->getId() == $id) {
+                                return $empresa;
+                            }
+                        }
+                    }
+                    function getCurso($id, $cursos) {
+                        foreach($cursos as $curso) {
+                            if ($curso->getId() == $id) {
+                                return $curso;
+                            }
+                        }
+                    }
+                    function getDocumento($id, $documentos) {
+                        foreach($documentos as $documento) {
+                            if ($documento->getId_contrato() == $id) {
+                                return $documento;
+                            }
+                        }
+                    }
+                    foreach ($contratos as $contrato) {
+                        if ($_SESSION["usuario"]->getNivel() == 4) {
+                            $contrato_allow = true;
+                            $est = getEstudante($contrato->getId_estudante(), $estudantes);
+                            $cur = getCurso($est->getId_curso(), $cursos);
+                            $emp = getEmpresa($contrato->getId_empresa(), $empresas);
+                            $pro = getProfessor($contrato->getId_professor(), $professores);
+                            $initDate = new DateTime(date("Y-m-d"));
+                            $endDate = new DateTime($contrato->getData_fim());
+                            //echo(isset($_GET["ano"]) && $contrato->getData_inicio() != $_GET["ano"]);
+                            //echo(isset($_GET["curso"]) && $cur->getNome() != urldecode($_GET["curso"]));
+                            //echo($cur->getNome() == urldecode($_GET["curso"]) ? "2": "");
+                            //echo($contrato_allow ? 1 : 2);
+                            if (isset($_GET["curso"]) && $cur->getNome() != urldecode($_GET["curso"])) {
+                                //echo(1);
+                                $contrato_allow = false;
+                            }
+                            if (isset($_GET["ano"]) && substr($contrato->getData_inicio(), 0, 4) != $_GET["ano"]) {
+                                $contrato_allow = false;
+                            }
+                            if (isset($_GET["estudante"]) && $est->getNome() != urldecode($_GET["estudante"])) {
+                                //echo(3);
+                                $contrato_allow = false;
+                            }
+                            if (isset($_GET["professor"]) && $pro->getNome() != urldecode($_GET["professor"])) {
+                                //echo(4);
+                                $contrato_allow = false;
+                            }
+                            if (isset($_GET["empresa"]) && $emp->getNome() != urldecode($_GET["empresa"])) {
+                                //echo(5);
+                                $contrato_allow = false;
+                            }
+                            if (isset($_GET["contrato"]) && (int) $initDate->diff($endDate)->days > 14 && (int) substr($contrato->getData_fim(), 0, 4) >= (int) date("Y")) {
+                                //echo(6);
+                                $contrato_allow = false;
+                            }
+                            //echo($contrato_allow ? 1 : 2);
+                            if ($contrato_allow) {
+                                ?>
+                                    <tr onclick="contrato_redirect(this)" data-id_contrato="<?php echo($contrato->getId())?>">
+                                        <td><?php echo $contrato->getId(); ?></td>
+                                        <td><?php echo $contrato->getProcesso(); ?></td>
+                                        <td><?php echo $contrato->getEncaminhamento(); ?></td>
+                                        <td><?php echo $contrato->getArea(); ?></td>
+                                        <td><?php echo $contrato->getData_inicio(); ?></td>
+                                        <td><?php echo $contrato->getData_fim(); ?></td>
+                                        <td><?php echo $contrato->getMedia_final(); ?></td>
+                                        <td><?php echo $contrato->getSupervisor(); ?></td>
+                                        <td><?php echo $contrato->getS_Cargo(); ?></td>
+                                        <td><?php echo $contrato->getS_Telefone(); ?></td>
+                                        <td><?php echo $contrato->getS_Email(); ?></td>
+                                        <td><?php echo $contrato->getObservacao(); ?></td>
+                                        <td><?php echo $contrato->getEncerramento(); ?></td>
+                                        <td><?php echo $contrato->getId_empresa(); ?></td>
+                                        <td><?php echo $contrato->getId_estudante(); ?></td>
+                                        <td><?php echo $contrato->getId_professor(); ?></td>
+                                        <td><a href="contrato.php?id=<?php echo($contrato->getId());?>"><i class="fa-solid fa-pen"></i></a></td>
+                                        <?php
+                                        if (is_null(getDocumento($contrato->getId(), $documentos))) {
+                                            ?>
+                                            <td><a href="excluirContrato.php?id=<?php echo($contrato->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tr>
+                                <?php
+                            }
+                        } else if ($_SESSION["usuario"]->getNivel() != 4) {
+                            ?>
+                                <tr onclick="contrato_redirect(this)" data-id_contrato="<?php echo($contrato->getId())?>">
                                     <td><?php echo $contrato->getId(); ?></td>
                                     <td><?php echo $contrato->getProcesso(); ?></td>
                                     <td><?php echo $contrato->getEncaminhamento(); ?></td>
@@ -122,40 +168,19 @@
                                 </tr>
                             <?php
                         }
-                    } else if ($_SESSION["usuario"]->getNivel() != 4) {
-                        ?>
-                            <tr>
-                                <td><?php echo $contrato->getId(); ?></td>
-                                <td><?php echo $contrato->getProcesso(); ?></td>
-                                <td><?php echo $contrato->getEncaminhamento(); ?></td>
-                                <td><?php echo $contrato->getArea(); ?></td>
-                                <td><?php echo $contrato->getData_inicio(); ?></td>
-                                <td><?php echo $contrato->getData_fim(); ?></td>
-                                <td><?php echo $contrato->getMedia_final(); ?></td>
-                                <td><?php echo $contrato->getSupervisor(); ?></td>
-                                <td><?php echo $contrato->getS_Cargo(); ?></td>
-                                <td><?php echo $contrato->getS_Telefone(); ?></td>
-                                <td><?php echo $contrato->getS_Email(); ?></td>
-                                <td><?php echo $contrato->getObservacao(); ?></td>
-                                <td><?php echo $contrato->getEncerramento(); ?></td>
-                                <td><?php echo $contrato->getId_empresa(); ?></td>
-                                <td><?php echo $contrato->getId_estudante(); ?></td>
-                                <td><?php echo $contrato->getId_professor(); ?></td>
-                            </tr>
-                        <?php
                     }
-                }
-                if ($contratos == []) {?>
-                    <tr>
-                        <td colspan="16">
-                            Sem contratos cadastrados...
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody>
-        </table>
+                    if ($contratos == []) {?>
+                        <tr>
+                            <td colspan="16">
+                                Sem contratos cadastrados...
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <section id="second-screen" style="display: none;"> <!--modal que abre na frente do usuário-->
+    <section id="second-screen"> <!--modal que abre na frente do usuário-->
         <div>
             <div><button class="window-button" onclick="window_interact(this)"><i class="fa-solid fa-xmark"></i></button></div> <!--botão que fecha a modal de filtro-->
         </div>
@@ -264,6 +289,9 @@
                 //css para abrir a modal
                 window_setter = true
             }
+        }
+        function contrato_redirect(element) {
+            window.location.href = `http://localhost/estagios_system/Code/contratoInfo.php?id_contrato=${element.dataset.id_contrato}`
         }
         function filter_update(element) {
             var link = "index.php?"

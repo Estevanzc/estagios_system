@@ -3,7 +3,9 @@
 namespace Controller;
 
 use Model\CursoModel;
+use Model\EstudanteModel;
 use Model\VO\CursoVO;
+use Model\VO\EstudanteVO;
 
 final class CursoController extends Controller {
 
@@ -11,8 +13,10 @@ final class CursoController extends Controller {
         $model = new CursoModel();
         $data = $model->selectAll(new CursoVO());
 
+        $estudantes = (new EstudanteModel())->selectAll(new EstudanteVO());
         $this->loadView("listaCursos", [
-            "cursos" => $data
+            "cursos" => $data,
+            "estudantes" => $estudantes
         ]);
     }
 
