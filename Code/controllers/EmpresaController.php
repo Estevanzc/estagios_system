@@ -17,7 +17,8 @@ final class EmpresaController extends Controller {
 
         $contrato = (new ContratoModel())->selectAll(new ContratoVO());
         $this->loadView("listaEmpresas", [
-            "empresas" => $data
+            "empresas" => $data,
+            "contratos" => $contrato
         ]);
     }
 

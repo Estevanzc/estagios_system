@@ -5,9 +5,11 @@ namespace Controller;
 use Model\EstudanteModel;
 use Model\UsuarioModel;
 use Model\CursoModel;
+use Model\ContratoModel;
 use Model\VO\EstudanteVO;
 use Model\VO\UsuarioVO;
 use Model\VO\CursoVO;
+use Model\VO\ContratoVO;
 
 final class EstudanteController extends Controller {
 
@@ -16,9 +18,11 @@ final class EstudanteController extends Controller {
         $data = $model->selectAll(new EstudanteVO());
 
         $curso = (new CursoModel())->selectAll(new CursoVO());
+        $contrato = (new ContratoModel())->selectAll(new ContratoVO());
         $this->loadView("listaEstudantes", [
             "estudantes" => $data,
-            "curso" => $curso,
+            "cursos" => $curso,
+            "contratos" => $contrato
         ]);
     }
 

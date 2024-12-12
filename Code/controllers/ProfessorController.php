@@ -4,8 +4,10 @@ namespace Controller;
 
 use Model\ProfessorModel;
 use Model\UsuarioModel;
+use Model\ContratoModel;
 use Model\VO\ProfessorVO;
 use Model\VO\UsuarioVO;
+use Model\VO\ContratoVO;
 
 final class ProfessorController extends Controller {
 
@@ -13,8 +15,10 @@ final class ProfessorController extends Controller {
         $model = new ProfessorModel();
         $data = $model->selectAll(new ProfessorVO());
 
+        $contrato = (new ContratoModel())->selectAll(new ContratoVO());
         $this->loadView("listaProfessores", [
-            "professores" => $data
+            "professores" => $data,
+            "contratos" => $contrato
         ]);
     }
 

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fazer Login - Seção de estágios</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="uploads/logo-no-txt.png">
 </head>
 <body>
     <div class="container">

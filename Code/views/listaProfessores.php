@@ -6,6 +6,7 @@
     <title>Listagem de Professores - Sistema de Estágios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="uploads/logo-no-txt.png">
 </head>
 <body>
     
@@ -31,11 +32,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($professores as $professor) {?> 
+                    <?php
+                    function getContrato($id, $contratos) {
+                        foreach ($contratos as $contrato) {
+                            if ($contrato->getId_professor() == $id) {
+                                return $contrato;
+                            }
+                        }
+                    }
+                    foreach ($professores as $professor) {?> 
                         <tr>
                             <td><?php echo $professor->getId() ?></td>
                             <td>
-                                <img src="<?php echo(is_null($professor->getFoto()) ? "White-Duck.png" : $professor->getFoto()); ?>" alt="Foto de perfil de <?php echo $professor->getNome(); ?>">
+                                <img style="width: 80%;" src="<?php echo(is_null($professor->getFoto()) ? "White-Duck.png" : $professor->getFoto()); ?>" alt="Foto de perfil de <?php echo $professor->getNome(); ?>">
                             </td>
                             <td><?php echo $professor->getNome() ?></td>
                             <td><?php echo $professor->getEmail() ?></td>
@@ -47,7 +56,13 @@
                             <td><?php echo $professor->getTelefone() ?></td>
                             <td><?php echo $professor->getFuncao() ?></td>
                             <td><a href="professor.php?id=<?php echo($professor->getId());?>"><i class="fa-solid fa-pen"></i></a></td>
-                            <td><a href="excluirProfessor.php?id=<?php echo($professor->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                            <?php
+                            if (is_null(getContrato($professor->getId(), $contratos))) {
+                                ?>
+                                <td><a href="excluirProfessor.php?id=<?php echo($professor->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                                <?php
+                            }
+                            ?>
                         </tr>
                     <?php } if ($professores == []) {?>
                         <tr>

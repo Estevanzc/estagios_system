@@ -6,6 +6,7 @@
     <title>Listagem de Documentos - Sistema de Estágios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="uploads/logo-no-txt.png">
 </head>
 <body>
     
@@ -34,11 +35,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($empresas as $empresa) {?> 
+                    <?php
+                    function getContrato($id, $contratos) {
+                        foreach ($contratos as $contrato) {
+                            if ($contrato->getId_empresa() == $id) {
+                                return $contrato;
+                            }
+                        }
+                    }
+                    foreach ($empresas as $empresa) {?> 
                         <tr>
                             <td><?php echo $empresa->getId() ?></td>
                             <td>
-                                <img src="<?php echo(is_null($empresa->getFoto()) ? "White-Duck.png" : $empresa->getFoto()); ?>" alt="Logo da Empresa <?php echo $empresa->getFoto() ?>">
+                                <img style="width: 80%;" src="<?php echo(is_null($empresa->getFoto()) ? "White-Duck.png" : $empresa->getFoto()); ?>" alt="Logo da Empresa <?php echo $empresa->getFoto() ?>">
                             </td>
                             <td><?php echo $empresa->getNome() ?></td>
                             <td><?php echo $empresa->getRazao_social() ?></td>
@@ -53,7 +62,13 @@
                             <td><?php echo $empresa->getTelefone() ?></td>
                             <td><?php echo $empresa->getConvenio() ?></td>
                             <td><a href="empresa.php?id=<?php echo($empresa->getId());?>"><i class="fa-solid fa-pen"></i></a></td>
-                            <td><a href="excluirEmpresa.php?id=<?php echo($empresa->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                            <?php
+                            if (is_null(getContrato($empresa->getId(), $contratos))) {
+                                ?>
+                                <td><a href="excluirEmpresa.php?id=<?php echo($empresa->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                                <?php
+                            }
+                            ?>
                         </tr>
                     <?php } if ($empresas == []) {?>
                         <tr>

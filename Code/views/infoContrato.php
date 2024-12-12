@@ -7,6 +7,7 @@
     <title>Listagem de Contratos - Sistema de Estágios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="uploads/logo-no-txt.png">
 </head>
 
 <body>
@@ -260,8 +261,22 @@
                             <td><?php echo $banca->getId(); ?></td>
                             <td><?php echo $banca->getNome(); ?></td>
                             <td><?php echo $banca->getEmail(); ?></td>
-                            <td><a href="banca.php?id=<?php echo($banca->getId());?>"><i class="fa-solid fa-pen"></i></a></td>
-                            <td><a href="excluirBanca.php?id=<?php echo($banca->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                            <?php
+                            if ($_SESSION["usuario"]->getNivel() == 4) {
+                                ?>
+                                <td><a href="banca.php?id=<?php echo($banca->getId());?>"><i class="fa-solid fa-pen"></i></a></td>
+                                <td><a href="excluirBanca.php?id=<?php echo($banca->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                    <?php } ?>
+                    <?php
+                    if ($bancas == []) {?>
+                        <tr>
+                            <td colspan="16">
+                                Sem bancas cadastradas...
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -290,7 +305,21 @@
                             <td><?php echo $documento->getId(); ?></td>
                             <td><?php echo $documento->getTipo(); ?></td>
                             <td><?php echo $documento->getNome(); ?></td>
-                            <td><a href="excluirDocumento.php?id=<?php echo($documento->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                            <?php
+                            if ($_SESSION["usuario"]->getNivel() == 4) {
+                                ?>
+                                <td><a href="excluirDocumento.php?id=<?php echo($documento->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                    <?php } ?>
+                    <?php
+                    if ($documentos == []) {?>
+                        <tr>
+                            <td colspan="16">
+                                Sem documentos cadastrados...
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

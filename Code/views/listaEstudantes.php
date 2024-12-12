@@ -6,6 +6,7 @@
     <title>Listagem de Estudantes - Seção de Estágios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="uploads/logo-no-txt.png">
 </head>
 <body>
     <?php require("includes/menu.php"); ?>
@@ -35,11 +36,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach($estudantes as $estudante) { ?>
+                    <?php
+                    function getCurso($id, $cursos) {
+                        foreach ($cursos as $curso) {
+                            if ($curso->getId() == $id) {
+                                return $curso;
+                            }
+                        }
+                    }
+                    function getContrato($id, $contratos) {
+                        foreach ($contratos as $contrato) {
+                            if ($contrato->getId_estudante() == $id) {
+                                return $contrato;
+                            }
+                        }
+                    }
+                    foreach($estudantes as $estudante) { ?>
                         <tr>
                             <td><?php echo $estudante->getId(); ?></td>
                             <td>
-                                <img src="uploads/<?php echo(is_null($estudante->getFoto()) ? "White-Duck.png" : $estudante->getFoto());?>" alt="<?php $estudante->getNome(); ?> Profile Image">
+                                <img style="width: 80%;" src="uploads/<?php echo(is_null($estudante->getFoto()) ? "White-Duck.png" : $estudante->getFoto());?>" alt="<?php $estudante->getNome(); ?> Profile Image">
                             </td>
                             <td><?php echo $estudante->getNome(); ?></td>
                             <td><?php echo $estudante->getEmail(); ?></td>
@@ -54,9 +70,15 @@
                             <td><?php echo $estudante->getCidade(); ?></td>
                             <td><?php echo $estudante->getEndereco(); ?></td>
                             <td><?php echo $estudante->getTelefone(); ?></td>
-                            <td><?php echo $estudante->getId_curso(); ?></td>
+                            <td><?php echo getCurso($estudante->getId_curso(), $cursos)->getNome(); ?></td>
                             <td><a href="estudante.php?id=<?php echo($estudante->getId());?>"><i class="fa-solid fa-pen"></i></a></td>
-                            <td><a href="excluirEstudante.php?id=<?php echo($estudante->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                            <?php
+                            if (is_null(getContrato($estudante->getId(), $contratos))) {
+                                ?>
+                                <td><a href="excluirEstudante.php?id=<?php echo($estudante->getId());?>"><i class="fa-solid fa-trash"></i></a></td>
+                                <?php
+                            }
+                            ?>
                         </tr>
                     <?php } if ($estudantes == []) {?>
                         <tr>

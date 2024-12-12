@@ -6,6 +6,7 @@
     <title>Listagem de Contratos - Sistema de Estágios</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="uploads/logo-no-txt.png">
 </head>
 <body>
     
@@ -132,9 +133,9 @@
                                         <td><?php echo $contrato->getS_Email(); ?></td>
                                         <td><?php echo $contrato->getObservacao(); ?></td>
                                         <td><?php echo $contrato->getEncerramento(); ?></td>
-                                        <td><?php echo $contrato->getId_empresa(); ?></td>
-                                        <td><?php echo $contrato->getId_estudante(); ?></td>
-                                        <td><?php echo $contrato->getId_professor(); ?></td>
+                                        <td><?php echo $emp->getNome(); ?></td>
+                                        <td><?php echo $est->getNome(); ?></td>
+                                        <td><?php echo $pro->getNome(); ?></td>
                                         <td><a href="contrato.php?id=<?php echo($contrato->getId());?>"><i class="fa-solid fa-pen"></i></a></td>
                                         <?php
                                         if (is_null(getDocumento($contrato->getId(), $documentos))) {
@@ -162,9 +163,9 @@
                                     <td><?php echo $contrato->getS_Email(); ?></td>
                                     <td><?php echo $contrato->getObservacao(); ?></td>
                                     <td><?php echo $contrato->getEncerramento(); ?></td>
-                                    <td><?php echo $contrato->getId_empresa(); ?></td>
-                                    <td><?php echo $contrato->getId_estudante(); ?></td>
-                                    <td><?php echo $contrato->getId_professor(); ?></td>
+                                    <td><?php echo $emp->getNome(); ?></td>
+                                    <td><?php echo $est->getNome(); ?></td>
+                                    <td><?php echo $pro->getNome(); ?></td>
                                 </tr>
                             <?php
                         }
@@ -299,14 +300,10 @@
                 if (filter_param[i].tagName == "SELECT" && Number(filter_param[i].value) != -1) {
                     link += (link != "index.php?" ? "&" : "") + `${filter_param[i].id}=${encodeURIComponent(filter_param[i].children[Number(filter_param[i].value)].innerHTML)}`
                 } else if (filter_param[i].type == "checkbox" && filter_param[i].checked == true) {
-                    //console.log(`${filter_param[i].id}=${filter_param[i].checked}`);
                     link += (link != "index.php?" ? "&" : "") + `${filter_param[i].id}=1`
-                    //console.log(1);
                     
                 } else if (filter_param[i].type == "text" && filter_param[i].value != "") {
-                    //console.log(`${filter_param[i].id}=${filter_param[i].checked}`);
                     link += (link != "index.php?" ? "&" : "") + `${filter_param[i].id}=${encodeURIComponent(filter_param[i].value)}`
-                    //console.log(1);
                     
                 }
             }
