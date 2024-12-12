@@ -3,7 +3,9 @@
 namespace Controller;
 
 use Model\BancaModel;
+use Model\ContratoModel;
 use Model\VO\BancaVO;
+use Model\VO\ContratoVO;
 
 final class BancaController extends Controller {
 
@@ -27,8 +29,10 @@ final class BancaController extends Controller {
             $banca = new BancaVO();
         }
 
+        $contratos = (new ContratoModel())->selectAll(new ContratoVO());
         $this->loadView("formBanca", [
-            "banca" => $banca
+            "banca" => $banca,
+            "contratos" => $contratos
         ]);
     }
 

@@ -3,7 +3,9 @@
 namespace Controller;
 
 use Model\DocumentoModel;
+use Model\ContratoModel;
 use Model\VO\DocumentoVO;
+use Model\VO\ContratoVO;
 
 final class DocumentoController extends Controller {
 
@@ -27,8 +29,10 @@ final class DocumentoController extends Controller {
             $documento = new DocumentoVO();
         }
 
+        $contratos = (new ContratoModel())->selectAll(new ContratoVO());
         $this->loadView("formDocumento", [
-            "documento" => $documento
+            "documento" => $documento,
+            "contratos" => $contratos
         ]);
     }
 

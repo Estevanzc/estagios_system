@@ -14,7 +14,7 @@
 
     <div class="container content">
 
-        <form class="form-add">
+        <form action="salvarEstudante.php" method="post" enctype="multipart/form-data" class="form-add">
             <h2>Adicione/Edite um estudante</h2>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do estudante" value="<?php echo $estudante->getNome(); ?>">
             <label for="file" class="file-input">
@@ -47,8 +47,8 @@
             
             <input type="text" name="telefone" id="telefone" placeholder="Digite o telefone do estudante" value="<?php echo $estudante->getTelefone(); ?>">
 
-            <label for="curso">Selecione o curso do estudante</label>
-            <select name="curso" id="curso">
+            <label for="id_curso">Selecione o curso do estudante</label>
+            <select name="id_curso" id="id_curso">
                 <?php
                     foreach ($cursos as $curso) {
                         ?>

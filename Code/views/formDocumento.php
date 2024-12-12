@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Banca - Sistema de Estágios</title>
+    <title>Editar/Adicionar Banca - Sistema de Estágios</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -14,14 +14,19 @@
 
     <div class="container content">
 
-        <form action="salvarBanca.php" method="post" class="form-add">
-            <h2>Cadastre uma banca</h2>
-            <input type="hidden" name="id" value="<?php echo $banca->getId(); ?>">
-            <input type="text" id="nome" name="nome" placeholder="Digite o nome da banca" value="<?php echo $banca->getNome(); ?>">
+        <form action="salvarDocumento.php" method="post" class="form-add">
+            <h2>Adicione/Edite um documento</h2>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome do documento" value="<?php echo $documento->getNome(); ?>">
             <br>
-            <input type="email" name="email" id="email" placeholder="Digite o e-mail da banca" value="<?php echo $banca->getEmail(); ?>">
+            <label for="tipo">Selecione o tipo do documento</label>
+            <select name="tipo" id="tipo">
+                <option value="1">Termo de Compromisso</option>
+                <option value="2">Plano de Atividades</option>
+                <option value="3">Ficha de Auto-Avaliação</option>
+                <option value="4">Ficha de Avaliação da Empresa</option>
+                <option value="5">Relatório Final</option>
+            </select>
             <br>
-            <label for="id_contrato">Selecione o contrato da banca</label>
             <select name="id_contrato" id="id_contrato">
                 <?php
                 foreach ($contratos as $contrato) {
@@ -32,7 +37,7 @@
                 ?>
             </select>
             <br>
-            <button>Cadastrar</button>
+            <button type="submit">Salvar</button>
         </form>
 
     </div>

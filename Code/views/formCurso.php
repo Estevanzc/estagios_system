@@ -14,7 +14,7 @@
 
     <div class="container content">
 
-        <form class="form-add">
+        <form action="salvarCurso.php" method="post" class="form-add">
             <h2>Cadastre um curso</h2>
             <input type="hidden" name="id" value="<?php echo $curso->getId(); ?>">
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do curso" value="<?php echo $curso->getNome(); ?>">

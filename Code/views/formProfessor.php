@@ -13,7 +13,7 @@
     <?php require("includes/menu.php") ?>
 
     <div class="container content">
-        <form class="form-add">
+        <form action="salvarProfessor.php" method="post" enctype="multipart/form-data" class="form-add">
             <h2>Cadastre/Edite um Professor:</h2>
             <input type="text" id="nome" name="nome" placeholder="Digite o nome do professor" value="<?php echo $professor->getNome() ?>">
             <br>
