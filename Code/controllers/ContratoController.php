@@ -86,10 +86,12 @@ final class ContratoController extends Controller {
         $estudante = (new EstudanteModel())->selectAll(new EstudanteVO());
         $empresa = (new EmpresaModel())->selectAll(new EmpresaVO());
         $professor = (new ProfessorModel())->selectAll(new ProfessorVO());
+        $cursos = (new CursoModel())->selectAll(new CursoVO());
         $this->loadView("formContrato", [
             "contrato" => $contrato,
             "estudantes" => $estudante,
             "professores" => $professor,
+            "cursos" => $cursos,
             "empresas" => $empresa
         ]);
     }

@@ -24,7 +24,7 @@
             <div class="decorative-circle-small"></div>
         </div>
     </div>
-
+    <?php require_once("includes/vlibras.php")?>
     <script src="./script.js"></script>
 </body>
 </html>

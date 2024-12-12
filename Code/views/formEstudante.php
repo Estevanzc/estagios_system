@@ -52,7 +52,7 @@
                 <?php
                     foreach ($cursos as $curso) {
                         ?>
-                        <option value="<?php $curso->getId();?>" <?php echo($curso->getId() == $estudante->getId_curso() ? "selected" : "");?>><?php echo $curso->getNome();?></option>
+                        <option value="<?php echo $curso->getId();?>" <?php echo($curso->getId() == $estudante->getId_curso() ? "selected" : "");?>><?php echo $curso->getNome();?></option>
                         <?php
                     }
                 ?>
@@ -62,6 +62,7 @@
         </form>
 
     </div>
+    <?php require_once("includes/vlibras.php")?>
 
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

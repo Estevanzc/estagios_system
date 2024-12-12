@@ -36,7 +36,28 @@
             <label for="semanal">Carga Horária Semanal (horas):</label>
             <input type="number" id="semanal" name="semanal" value="0" min="1" max="40">
             <label for="data_fim">Selecione a data de finalização do estágio</label>
-            <span data-carga="200"></span>
+            <?php
+            function getEstudante($id, $estudantes) {
+                foreach($estudantes as $estudante) {
+                    if ($estudante->getId() == $id) {
+                        return $estudante;
+                    }
+                }
+            }
+            function getCurso($id, $cursos) {
+                foreach($cursos as $curso) {
+                    if ($curso->getId() == $id) {
+                        return $curso;
+                    }
+                }
+            }/*
+            $est = getEstudante($contrato->getId_estudante(), $estudantes);
+            echo($contrato->getId_estudante());
+            print_r($est);
+            die;
+            $cur = getCurso($est->getId_curso(), $cursos);*/
+            ?>
+            <span id="carga_horaria" data-carga=""></span>
             <input type="date" name="data_fim" id="data_fim" value="<?php echo $contrato->getData_fim(); ?>">
             
             <input type="number" name="media_final" id="media_final" placeholder="Digite a media final" value="<?php echo ($contrato->getMedia_final() ? $contrato->getMedia_final() : ""); ?>">
@@ -66,11 +87,11 @@
             </select>
 
             <label for="id_estudante">Selecione o estudante</label>
-            <select name="id_estudante" id="id_estudante">
-                <?php 
+            <select name="id_estudante" id="id_estudante" onchange="carga_horaria_btn(this)">
+                <?php
                     foreach ($estudantes as $estudante) {
                         ?>
-                        <option value="<?php echo($estudante->getId());?>"><?php echo($estudante->getNome());?></option>
+                        <option value="<?php echo($estudante->getId());?>" data-carga_horaria="<?php echo(getCurso($estudante->getId_curso(), $cursos)->getCarga_horaria())?>"><?php echo($estudante->getNome());?></option>
                         <?php
                     }
                 ?>
@@ -91,6 +112,7 @@
         </form>
 
     </div>
+    <?php require_once("includes/vlibras.php")?>
 
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -100,7 +122,20 @@
     <script>
     document.getElementById('data_inicio').addEventListener('change', calculaDataFinal);
     document.getElementById('semanal').addEventListener('change', calculaDataFinal);
+    var estudante_select = document.getElementById("id_estudante")
 
+    function getId_option($value) {
+        for (var i = 0; i <= estudante_select.children.length-1; i ++) {
+            if (estudante_select.children[i].value == $value) {
+                return i
+            }
+        }
+    }
+    function carga_horaria_btn(element) {
+        console.log(getId_option(Number(element.value)));
+        document.getElementById("carga_horaria").dataset.carga = element.children[getId_option(Number(element.value))].dataset.carga_horaria
+        console.log(element.children[getId_option(Number(element.value))].dataset.carga_horaria);
+    }
     function calculaDataFinal() {
         const dataInicioInput = document.getElementById('data_inicio');
         const cargaHorariaInput = document.getElementById('semanal');
