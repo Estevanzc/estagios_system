@@ -7,11 +7,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="uploads/logo-no-txt.png">
+    <style>
+        .container.content {
+            gap: 10px 0px;
+        }
+        #insert_button {
+            width: 175px;
+            height: 30px;
+            font-weight: bold;
+            margin-right: 50px;
+            align-self: flex-end;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: rgb(80,85,203);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-family: 'Montserrat', 'Poppins', 'Arial';
+        }
+    </style>
 </head>
 <body>
     <?php require("includes/menu.php"); ?>
     
     <div class="container content">
+        <a href="estudante.php" id="insert_button">Inserir Estudante</a>
         <div class="table-container">
             <table>
                 <thead>

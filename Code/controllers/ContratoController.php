@@ -81,9 +81,9 @@ final class ContratoController extends Controller {
         } else {
             $contrato = new ContratoVO();
         }
-        $estudante = (new EstudanteModel())->selectOne((int) $contrato["id_estudante"]);
-        $empresa = (new EmpresaModel())->selectOne((int) $contrato["id_empresa"]);
-        $professor = (new ProfessorModel())->selectOne((int) $contrato["id_professor"]);
+        $estudante = (new EstudanteModel())->selectOne(new EstudanteVO($contrato->getId_estudante()));
+        $empresa = (new EmpresaModel())->selectOne(new EmpresaVO($contrato->getId_empresa()));
+        $professor = (new ProfessorModel())->selectOne(new ProfessorVO($contrato->getId_professor()));
         $this->loadView("formContrato", [
             "contrato" => $contrato,
             "estudante" => $estudante,

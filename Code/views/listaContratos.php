@@ -111,7 +111,7 @@
         #filter-apply:hover {
             box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
         }
-        .window-button:nth-child(1) {
+        .window-button:nth-child(1), #insert_button {
             width: 80px;
             height: 30px;
             font-weight: bold;
@@ -122,6 +122,14 @@
             cursor: pointer;
             border-radius: 5px;
             background-color: rgb(80,85,203);
+        }
+        #insert_button {
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-family: 'Montserrat', 'Poppins', 'Arial';
         }
         .container.content {
             gap: 10px 0px;
@@ -134,6 +142,7 @@
 
     <div class="container content">
         <button class="window-button" onclick="window_interact(this)">Filtros</button> <!--botão que abre a modal de filtro-->
+        <a href="contrato.php" id="insert_button">Inserir Contrato</a>
         <div class="table-container">
             <table>
                 <thead>
