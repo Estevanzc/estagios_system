@@ -39,7 +39,7 @@ final class BancaController extends Controller {
     public function save() {
         $id = $_POST["id"];
         $model = new BancaModel();
-        $vo = new BancaVO($id, $_POST["nome"], $_POST["email"], $_POST["id_contrato"]);
+        $vo = new BancaVO($id, $_POST["nome"], $_POST["email"], (int) $_POST["id_contrato"]);
 
         if(empty($id)) {
             $result = $model->insert($vo);

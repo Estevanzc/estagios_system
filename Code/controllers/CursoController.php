@@ -39,7 +39,7 @@ final class CursoController extends Controller {
     public function save() {
         $id = $_POST["id"];
         $model = new CursoModel();
-        $vo = new CursoVO($id, $_POST["nome"], $_POST["carga_horaria"]);
+        $vo = new CursoVO($id, $_POST["nome"], (int) $_POST["carga_horaria"]);
 
         if(empty($id)) {
             $result = $model->insert($vo);

@@ -39,7 +39,7 @@ final class DocumentoController extends Controller {
     public function save() {
         $id = $_POST["id"];
         $model = new DocumentoModel();
-        $vo = new DocumentoVO($id, $_POST["tipo"], $_POST["nome"], $_POST["id_contrato"]);
+        $vo = new DocumentoVO($id, $_POST["tipo"], $_POST["nome"], (int) $_POST["id_contrato"]);
 
         if(empty($id)) {
             $result = $model->insert($vo);
