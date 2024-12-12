@@ -30,7 +30,7 @@
                             <td><?php echo $banca->getNome(); ?></td>
                             <td><?php echo $banca->getEmail(); ?></td>
                             <td>
-                                <a href="uploads/<?php echo $banca->getId_contrato(); ?>">
+                                <a href="contratoInfo.php?id_contrato=<?php echo $banca->getId_contrato(); ?>">
                                     Visualizar contrato de <?php echo $banca->getNome(); ?>
                                 </a>
                             </td>

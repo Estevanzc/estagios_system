@@ -30,7 +30,7 @@
                             <td><?php echo $documento->getTipo(); ?></td>
                             <td><?php echo $documento->getNome(); ?></td>
                             <td>
-                                <a href="uploads/<?php echo $documento->getId_contrato(); ?>">
+                                <a href="contratoInfo.php?id_contrato=<?php echo $documento->getId_contrato(); ?>">
                                     Visualizar contrato de <?php echo $documento->getNome(); ?>
                                 </a>
                             </td>
